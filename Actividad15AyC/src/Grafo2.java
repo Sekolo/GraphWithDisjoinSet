@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public class Grafo {
+public class Grafo2 {
 	private int[] nodos;
 	private ArrayList<Pesado> arcos;
 
@@ -58,7 +58,7 @@ public class Grafo {
 	
 
 	@SuppressWarnings("rawtypes")
-	public Grafo(GrafoObj grafoJson){
+	public Grafo2(GrafoObj grafoJson){
 		this.nodos = grafoJson.nodos;
 		this.arcos = new ArrayList<Pesado>();
 		
