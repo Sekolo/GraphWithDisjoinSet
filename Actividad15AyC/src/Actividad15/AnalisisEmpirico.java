@@ -1,3 +1,4 @@
+package Actividad15;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.PriorityQueue;
@@ -12,7 +13,7 @@ import com.google.gson.GsonBuilder;
 		public static void main(String[] args) throws IOException {
 			
 			try{
-				Grafo grafo = getGrafo(500,65000);
+				Grafo grafo = getGrafo(5,4);
 				
 				System.out.println("Grafo conexo con "+ grafo.getNodosCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
@@ -39,7 +40,7 @@ import com.google.gson.GsonBuilder;
 
 		private static Grafo getGrafo(int nodos, int arcos) throws Exception {
 			// TODO Auto-generated method stub
-			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos+"&conexo=1";//+"&conexo=0"
+			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos;//+"&conexo=0"
 			Process process = Runtime.getRuntime().exec(consulta);
 			InputStream inputSt = process.getInputStream();
 			@SuppressWarnings("resource")
