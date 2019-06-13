@@ -1,15 +1,18 @@
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+
 
 	public class AnalisisEmpirico{
 		
 		public static void main(String[] args) throws IOException {
 			
 			try{
-				Grafo grafo = getGrafo(5,5);
+				Grafo grafo = getGrafo(500,65000);
 				
 				System.out.println("Grafo conexo con "+ grafo.getNodosCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
@@ -36,7 +39,7 @@ import com.google.gson.GsonBuilder;
 
 		private static Grafo getGrafo(int nodos, int arcos) throws Exception {
 			// TODO Auto-generated method stub
-			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos;//+"&conexo=0"
+			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos+"&conexo=1";//+"&conexo=0"
 			Process process = Runtime.getRuntime().exec(consulta);
 			InputStream inputSt = process.getInputStream();
 			@SuppressWarnings("resource")
@@ -74,6 +77,25 @@ import com.google.gson.GsonBuilder;
 			else
 				System.out.println("El grafo es NO conexo");
 			
+		}
+		
+		
+		private static boolean spereTree(Grafo g) {
+			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
+			
+			
+			PriorityQueue<Pesado> minHeap = new PriorityQueue<Pesado>();
+			
+			for (int i = 0; i < g.getArcos().size(); i++ ) {
+				minHeap.add(g.getArcos().get(i));
+			}
+			
+			for (int i = 0; i < g.getArcos().size(); i++ ) {
+			}
+			
+			return true;
+		
+		
 		}
 		
 	}

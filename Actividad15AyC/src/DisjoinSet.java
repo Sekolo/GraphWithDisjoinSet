@@ -1,12 +1,15 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class DisjoinSet {
 	private int[] padre;
 	private int[] rank;
+	private int tam;
 	
 	public DisjoinSet(int n) {
 		padre = new int [n];
 		rank = new int[n];
+		tam = n;
 		
 		for (int i=0; i<n;i++ ) {
 			makeSet(i);
@@ -51,6 +54,17 @@ public class DisjoinSet {
 		
 		return conex;
 	}
+	
+	
+	/*public boolean spereTree() {
+		PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(tam);
+		
+		for ()
+		
+		for (int i = 0; i < padre.length; i++ ) {
+			minHeap.add(padre[])
+		}
+	}*/
 	
 
 }

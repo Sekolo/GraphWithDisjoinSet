@@ -4,7 +4,7 @@ public class Grafo {
 	private int[] nodos;
 	private ArrayList<Pesado> arcos;
 
-	class Pesado {
+	/*class Pesado {
 		private Arco arco;
 		private int peso;
 		
@@ -37,7 +37,11 @@ public class Grafo {
 			return arco; 
 		}
 		
-	}
+		public int getPeso() {
+			return peso;
+		}
+		
+	}*/
 	
 	public ArrayList<Pesado> getArcos() {
 		return arcos;
