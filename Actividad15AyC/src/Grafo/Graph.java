@@ -3,27 +3,27 @@ package Grafo;
  * Interface Graph No Dirigido
  * @author Reyes-Rodriguez-Merino, Departamento de Cs. e Ing. de la Computación, UNS.
  */
-	public interface Graph<V, E> {
+	public interface Graph{
 		
 		
 		/**
-		 * Devuelve el opuesto del vértice v,'w', del arco e, (e,v)=w; ocurre un error si e no es incidente o emergente de v.
+		 * Devuelve el opuesto del vértice v,'w', del Edge e, (e,v)=w; ocurre un error si e no es incidente o emergente de v.
 		 * @param v Vertice a obtener su opuesto.
-		 * @param e Arco a obtener opuesto de v.
-		 * @return El vertice opuesto de v, en el arco e.
+		 * @param e Edge a obtener opuesto de v.
+		 * @return El vertice opuesto de v, en el Edge e.
 		 * @throws InvalidVertexException si vertice pasado por parametro es invalido.
-		 * @throws InvalidEdgeException si arco pasado por paramentro es invalido.
-		 * @throws GraphException si vertice v y arco e no se relacionan.
+		 * @throws InvalidEdgeException si Edge pasado por paramentro es invalido.
+		 * @throws GraphException si vertice v y Edge e no se relacionan.
 		 */
-		public Vertice opposite(Vertice v, Arco e) throws Exception;
+		public Vertice opposite(Vertice v, Edge e) throws Exception;
 		
 		/**
-		 * Devuelve un arreglo conteniendo los vértices del arco e.
-		 * @param e Arco a obtener sus vertices.
-		 * @return Un arreglo (de 2componentes) conteniendo los vértices del arco e.
-		 * @throws InvalidEdgeException si arco pasado por parametro es invalido.
+		 * Devuelve un arreglo conteniendo los vértices del Edge e.
+		 * @param e Edge a obtener sus vertices.
+		 * @return Un arreglo (de 2componentes) conteniendo los vértices del Edge e.
+		 * @throws InvalidEdgeException si Edge pasado por parametro es invalido.
 		 */
-		public Vertice[] endVertices(Arco e) throws Exception;
+		public Vertice[] endVertices(Edge e) throws Exception;
 		
 		/**
 		 * Comprueba si los vértices v y w son adyacentes.
@@ -41,16 +41,16 @@ package Grafo;
 		 * @return Vertice con su nuevo rotulo.
 		 * @throws InvalidVertexException si vertice es invalido.
 		 */
-		public V replace(Vertice v, int x) throws Exception;
+		public int replace(Vertice v, int x) throws Exception;
 		
 		/**
-		 * Reemplaza el rótulo del arco e con x.
-		 * @param e Arco a remplazar su rotulo.
+		 * Reemplaza el rótulo del Edge e con x.
+		 * @param e Edge a remplazar su rotulo.
 		 * @param x rotulo por el cual se va aremplazar rotulo de e.
-		 * @return Arco con su nuevo rotulo.
-		 * @throws InvalidEdgeException si arco es invalido.
+		 * @return Edge con su nuevo rotulo.
+		 * @throws InvalidEdgeException si Edge es invalido.
 		 */
-		public E replace(Arco e, int x) throws Exception;
+		public int replace(Edge e, int x) throws Exception;
 		
 		/**
 		 * Inserta y retorna un nuevo vértice con rótulo x.
@@ -60,28 +60,28 @@ package Grafo;
 		public Vertice insertVertex(int x);
 		
 		/**
-		 * Inserta un arco con rotulo x, entre v y w (v-w).
-		 * @param v Vertice al cual se le asigna nuevo arco E(E).
-		 * @param w Vertice al cual se le asigna nuevo arco E(I).
-		 * @param x Rotulo del nuevo arco
-		 * @return Nuevo arco con rotulo x, y vertices v y w.
+		 * Inserta un Edge con rotulo x, entre v y w (v-w).
+		 * @param v Vertice al cual se le asigna nuevo Edge E(E).
+		 * @param w Vertice al cual se le asigna nuevo Edge E(I).
+		 * @param x Rotulo del nuevo Edge
+		 * @return Nuevo Edge con rotulo x, y vertices v y w.
 		 * @throws InvalidVertexException si vertice pasado por parametro es Invalido.
 		 */
-		public Arco insertEdge(Vertice v, Vertice w, int x) throws Exception;
+		public Edge insertEdge(Vertice v, Vertice w, int x) throws Exception;
 		
 		/**
-		 * Elimina el vertice v y elimina todos sus arcos adyacentes.
+		 * Elimina el vertice v y elimina todos sus Edges adyacentes.
 		 * @param v Vertice a eliminar.
 		 * @return Rotulo de vertice eliminado.
 		 * @throws InvalidVertexException si vertice pasado por parametro es Invalido.
 		 */
-		public V removeVertex(Vertice v) throws Exception;
+		public Vertice removeVertex(Vertice v) throws Exception;
 		
 		/**
-		 * Elimina arco e y retorna el rotulo de este.
-		 * @param e Arco a eliminar.
-		 * @return Rotulo de arco eliminado.
-		 * @throws InvalidEdgeException si arco pasado por parametro es Invalido.
+		 * Elimina Edge e y retorna el rotulo de este.
+		 * @param e Edge a eliminar.
+		 * @return Rotulo de Edge eliminado.
+		 * @throws InvalidEdgeException si Edge pasado por parametro es Invalido.
 		 */
-		public E removeEdge(Arco e) throws Exception;
+		public int removeEdge(Edge e) throws Exception;
 }

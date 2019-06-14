@@ -60,7 +60,7 @@ import com.google.gson.GsonBuilder;
 		private static void ver(Grafo g) {
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				System.out.println("nodo "+g.getArcos().get(i).get().getN1().element()+" arco con "+ g.getArcos().get(i).get().getN2().element());
+				System.out.println("nodo "+g.getArcos().get(i).getN1().element()+" arco con "+ g.getArcos().get(i).getN2().element());
 				
 			}
 		}
@@ -69,7 +69,7 @@ import com.google.gson.GsonBuilder;
 			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				conj.union(g.getArcos().get(i).get().getN1().element(), g.getArcos().get(i).get().getN2().element());
+				conj.union(g.getArcos().get(i).getN1().element(), g.getArcos().get(i).getN2().element());
 				
 			}
 			
@@ -88,7 +88,7 @@ import com.google.gson.GsonBuilder;
 			PriorityQueue<Pesado> minHeap = new PriorityQueue<Pesado>();
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				minHeap.add(g.getArcos().get(i));
+				//minHeap.add(g.getArcos().get(i));
 			}
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
