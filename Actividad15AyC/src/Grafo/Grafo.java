@@ -34,43 +34,40 @@ public class Grafo implements Graph {
 	}
 
 
-
-
-	@Override
 	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 
 
-	@Override
+	
 	public int replace(Vertice v, int x) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 
 
-	@Override
+	
 	public int replace(Edge e, int x) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 
 
-	@Override
+	
 	public Vertice insertVertex(int x) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 
 
-	@Override
+	
 	public Edge insertEdge(Vertice v, Vertice w, int x) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
