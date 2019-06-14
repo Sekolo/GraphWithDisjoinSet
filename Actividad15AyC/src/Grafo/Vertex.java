@@ -2,7 +2,7 @@ package Grafo;
 
 import java.util.ArrayList;
 
-public interface Vertex<E>  {
+public interface Vertex  {
 	
 	public void setRotulo(int rot);
 

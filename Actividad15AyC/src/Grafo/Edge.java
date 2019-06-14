@@ -1,6 +1,6 @@
 package Grafo;
 
-public interface Edge<E> {
+public interface Edge {
 	
 	public Vertice  getN1();
 	

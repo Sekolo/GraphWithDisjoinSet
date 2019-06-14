@@ -3,19 +3,23 @@ package Grafo;
 import java.util.ArrayList;
 
 import GrafoTurbio.ArcoL;
+import GrafoTurbio.EmptyListException;
 import GrafoTurbio.VerticeL;
 
 
 public class Grafo implements Graph {
 	
-	private int[] nodos;
+	
+	private ArrayList<Vertex> nodos;
 	private ArrayList<Edge> Edges;
-
+	
+	
+	public Grafo() {
+		
+	}
 
 	
-	public Vertice opposite(Vertice v, Edge e) throws Exception  {
-		//VerticeL<V,E> vl= checkVertex(v);
-		//EdgeL<V,E> al= checkEdge(e);
+	public Vertice opposite(Vertex v, Edge e) throws Exception  {
 		if(e.getN1() == v)
 			return e.getN2();
 		else
@@ -37,7 +41,7 @@ public class Grafo implements Graph {
 	}
 
 
-	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
+	public boolean areAdjacent(Vertex v, Vertex w) throws Exception {
 		for(Edge a: v.getAdyacentes())
 			if(a.getN1()==w || a.getN2()==v)
 				return true;
@@ -50,7 +54,6 @@ public class Grafo implements Graph {
 
 	
 	public int replace(Vertice v, int x) throws Exception {
-		
 		return 0;
 	}
 
@@ -58,7 +61,6 @@ public class Grafo implements Graph {
 
 	
 	public int replace(Edge e, int x) throws Exception {
-		
 		return 0;
 	}
 
@@ -66,8 +68,10 @@ public class Grafo implements Graph {
 
 	
 	public Vertice insertVertex(int x) {
-
-		return null;
+		Vertice v= new Vertice(x);
+		nodos.add(v);
+		
+		return v;
 	}
 
 
@@ -92,6 +96,20 @@ public class Grafo implements Graph {
 	public int removeEdge(Edge e) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public Vertice opposite(Vertice v, Edge e) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
