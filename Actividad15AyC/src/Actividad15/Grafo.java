@@ -2,11 +2,13 @@ package Actividad15;
 
 import java.util.ArrayList;
 
+import Grafo.ArcoP;
+import Grafo.Edge;
 import Grafo.Vertice;
 
 public class Grafo {
 	private int[] nodos;
-	private ArrayList<Pesado> arcos;
+	private ArrayList<Edge> arcos;
 
 	/*class Pesado {
 		private Arco arco;
@@ -47,7 +49,7 @@ public class Grafo {
 		
 	}*/
 	
-	public ArrayList<Pesado> getArcos() {
+	public ArrayList<Edge> getArcos() {
 		return arcos;
 	}
 	
@@ -63,7 +65,7 @@ public class Grafo {
 	@SuppressWarnings("rawtypes")
 	public Grafo(GrafoObj grafoJson){
 		this.nodos = grafoJson.nodos;
-		this.arcos = new ArrayList<Pesado>();
+		this.arcos = new ArrayList<Edge>();
 		
 		Object[][] arcosJson = grafoJson.arcos;
 		
@@ -75,8 +77,9 @@ public class Grafo {
 			Vertice v2 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
 			arcoLista.add(v1);
 			arcoLista.add(v2);
-			Pesado pesado = new Pesado(arcoLista, ((Double) arcosJson[i][1]).intValue());
-			this.arcos.add(pesado); 
+			Edge arco = new ArcoP(v1,v2, ((Double) arcosJson[i][1]).intValue());
+			//Pesado pesado = new Pesado(arcoLista, ((Double) arcosJson[i][1]).intValue());
+			this.arcos.add(arco); 
 		}
 	}
 	

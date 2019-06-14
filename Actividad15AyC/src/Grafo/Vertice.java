@@ -2,25 +2,21 @@ package Grafo;
 
 import java.util.ArrayList;
 
-public class Vertice {
+public class Vertice implements Vertex {
 	private int rotulo;
-	private ArrayList<Arco> adyacentes;
+	private ArrayList<Edge> adyacentes;
 	//private Position<VerticeL<V,E>> posicionEnNodos;
 	
 	public Vertice(int rot) {
 		rotulo = rot;
-		adyacentes = new ArrayList<Arco>();
+		adyacentes = new ArrayList<Edge>();
 	}
 	
 	public void setRotulo(int rot) {  
 		rotulo = rot;
 	}
 	
-	/*public void setPosicionEnNodos(Position<VerticeL<V,E>> p) { 
-		posicionEnNodos=p;
-	}*/
-	
-	public void addAdyacente(Arco a){
+	public void addAdyacente(Edge a){
 		adyacentes.add(a);
 	}
 	
@@ -28,12 +24,9 @@ public class Vertice {
 		return rotulo; 
 	}
 	
-	public ArrayList<Arco> getAdyacentes() {
+	public ArrayList<Edge> getAdyacentes() {
 		return adyacentes;
 	}
 	
 	
-	/*public Position<VerticeL<V,E>> getPosicionEnNodos(){
-		return posicionEnNodos;
-	}*/
 }
