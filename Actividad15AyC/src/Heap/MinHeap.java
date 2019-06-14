@@ -1,10 +1,10 @@
 package Heap;
 
+//Implementación en Java de la clase MinHeap.
 public class MinHeap {
 	private int [] heap; 
 	private int size; 
 	private int max_size; 
-
 	private static final int FRONT = 1; 
 
 	public MinHeap(int max_size) 
@@ -15,6 +15,7 @@ public class MinHeap {
 		heap[0] = Integer.MIN_VALUE; 
 	} 
 
+	//Funcion para insertar elementos en el heap manteniendo las propiedades de la estructura.
 	public void insert(int element) 
 	{ 
 		if (size < max_size) 
@@ -30,6 +31,7 @@ public class MinHeap {
 		} 
 	} 
 
+	//Función para la extracción del minimo elemento del heap, manteniendo la propiedad de orden del heap.
 	public int popMin() 
 	{ 
 		int popped = heap[FRONT]; 
@@ -38,31 +40,25 @@ public class MinHeap {
 		return popped; 
 	}
 	
-	public void print() 
-    { 
-        for (int i = 1; i <= size / 2; i++) { 
-            System.out.print(" Padre: " + heap[i] 
-                             + ", Hijo izquierdo: " + heap[2 * i] 
-                             + ", Hijo derecho: " + heap[2 * i + 1]); 
-            System.out.println(); 
-        } 
-    } 
-	
+	//Función para solicitar el padre de un elemento.
 	private int parent(int pos) 
 	{ 
 		return pos / 2; 
 	} 
 
+	//Función para solicitar el hijo izquierdo de un elemento.
 	private int leftChild(int pos) 
 	{ 
 		return (2 * pos); 
 	} 
 
+	//Función para solicitar el hijo derecho de un elemento.
 	private int rightChild(int pos) 
 	{ 
 		return (2 * pos) + 1; 
 	} 
 
+	//Función para consultar si elemento es hoja del heap.
 	private boolean isLeaf(int pos) 
 	{ 
 		if (pos >= (size / 2) && pos <= size) 
@@ -72,6 +68,7 @@ public class MinHeap {
 		return false; 
 	} 
 
+	//Función para intercambiar de lugar dos elementos.
 	private void swap(int fpos, int spos) 
 	{ 
 		int tmp; 
@@ -80,6 +77,7 @@ public class MinHeap {
 		heap[spos] = tmp; 
 	} 
 
+	//Función para reordenar el elemento en esa posicion para mantener la propiedad de heap.
 	private void minHeapify(int pos) 
 	{ 
 		if (!isLeaf(pos)) 
