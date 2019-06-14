@@ -40,7 +40,7 @@ import com.google.gson.GsonBuilder;
 
 		private static Grafo getGrafo(int nodos, int arcos) throws Exception {
 			// TODO Auto-generated method stub
-			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos;//+"&conexo=0"
+			String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos+"&conexo=0";   //&conexo=0
 			Process process = Runtime.getRuntime().exec(consulta);
 			InputStream inputSt = process.getInputStream();
 			@SuppressWarnings("resource")
@@ -60,7 +60,7 @@ import com.google.gson.GsonBuilder;
 		private static void ver(Grafo g) {
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				System.out.println("nodo "+g.getArcos().get(i).get().getN1()+" arco con "+ g.getArcos().get(i).get().getN2());
+				System.out.println("nodo "+g.getArcos().get(i).get().getN1().element()+" arco con "+ g.getArcos().get(i).get().getN2().element());
 				
 			}
 		}
@@ -69,7 +69,7 @@ import com.google.gson.GsonBuilder;
 			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				conj.union(g.getArcos().get(i).get().getN1(), g.getArcos().get(i).get().getN2());
+				conj.union(g.getArcos().get(i).get().getN1().element(), g.getArcos().get(i).get().getN2().element());
 				
 			}
 			

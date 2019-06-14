@@ -2,6 +2,8 @@ package Actividad15;
 
 import java.util.ArrayList;
 
+import Grafo.Vertice;
+
 public class Grafo {
 	private int[] nodos;
 	private ArrayList<Pesado> arcos;
@@ -67,9 +69,12 @@ public class Grafo {
 		
 		for (int i = 0; i<arcosJson.length; i++){
 			
-			ArrayList<Integer> arcoLista = new ArrayList<>(); 
-			arcoLista.add(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
-			arcoLista.add(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
+			ArrayList<Vertice> arcoLista = new ArrayList<>(); 
+			
+			Vertice v1 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
+			Vertice v2 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
+			arcoLista.add(v1);
+			arcoLista.add(v2);
 			Pesado pesado = new Pesado(arcoLista, ((Double) arcosJson[i][1]).intValue());
 			this.arcos.add(pesado); 
 		}

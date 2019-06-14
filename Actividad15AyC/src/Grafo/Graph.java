@@ -1,7 +1,7 @@
 package Grafo;
 /**
  * Interface Graph No Dirigido
- * @author Iñaki Barreix y Sebastian Benamo, alumnos de Estructuras de Datos(2015), Departamento de Cs. e Ing. de la Computación, UNS.
+ * @author Reyes-Rodriguez-Merino, Departamento de Cs. e Ing. de la Computación, UNS.
  */
 	public interface Graph<V, E> {
 		
@@ -15,7 +15,7 @@ package Grafo;
 		 * @throws InvalidEdgeException si arco pasado por paramentro es invalido.
 		 * @throws GraphException si vertice v y arco e no se relacionan.
 		 */
-		public Vertex<V> opposite(Vertex<V> v, Edge<E> e) throws Exception;
+		public Vertice opposite(Vertice v, Arco e) throws Exception;
 		
 		/**
 		 * Devuelve un arreglo conteniendo los vértices del arco e.
@@ -23,7 +23,7 @@ package Grafo;
 		 * @return Un arreglo (de 2componentes) conteniendo los vértices del arco e.
 		 * @throws InvalidEdgeException si arco pasado por parametro es invalido.
 		 */
-		public Vertex<V> [] endVertices(Edge<E> e) throws Exception;
+		public Vertice[] endVertices(Arco e) throws Exception;
 		
 		/**
 		 * Comprueba si los vértices v y w son adyacentes.
@@ -32,7 +32,7 @@ package Grafo;
 		 * @return True si los vertices son adyacentes, sino false.
 		 * @throws InvalidVertexException si cualquiera de los dos vertices, pasados por parametro, son invalidos. 
 		 */
-		public boolean areAdjacent(Vertex<V> v, Vertex<V> w) throws Exception;
+		public boolean areAdjacent(Vertice v, Vertice w) throws Exception;
 		
 		/**
 		 * Reemplaza el rótulo del vértice v con x.
@@ -41,7 +41,7 @@ package Grafo;
 		 * @return Vertice con su nuevo rotulo.
 		 * @throws InvalidVertexException si vertice es invalido.
 		 */
-		public V replace(Vertex<V> v, V x) throws Exception;
+		public V replace(Vertice v, int x) throws Exception;
 		
 		/**
 		 * Reemplaza el rótulo del arco e con x.
@@ -50,14 +50,14 @@ package Grafo;
 		 * @return Arco con su nuevo rotulo.
 		 * @throws InvalidEdgeException si arco es invalido.
 		 */
-		public E replace(Edge<E> e, E x) throws Exception;
+		public E replace(Arco e, int x) throws Exception;
 		
 		/**
 		 * Inserta y retorna un nuevo vértice con rótulo x.
 		 * @param x Rotulo del nuevo vertice.
 		 * @return El nuevo vertice con rotulo x.
 		 */
-		public Vertex<V> insertVertex(V x);
+		public Vertice insertVertex(int x);
 		
 		/**
 		 * Inserta un arco con rotulo x, entre v y w (v-w).
@@ -67,7 +67,7 @@ package Grafo;
 		 * @return Nuevo arco con rotulo x, y vertices v y w.
 		 * @throws InvalidVertexException si vertice pasado por parametro es Invalido.
 		 */
-		public Edge<E> insertEdge(Vertex<V> v, Vertex<V> w, E x) throws Exception;
+		public Arco insertEdge(Vertice v, Vertice w, int x) throws Exception;
 		
 		/**
 		 * Elimina el vertice v y elimina todos sus arcos adyacentes.
@@ -75,7 +75,7 @@ package Grafo;
 		 * @return Rotulo de vertice eliminado.
 		 * @throws InvalidVertexException si vertice pasado por parametro es Invalido.
 		 */
-		public V removeVertex(Vertex<V> v) throws Exception;
+		public V removeVertex(Vertice v) throws Exception;
 		
 		/**
 		 * Elimina arco e y retorna el rotulo de este.
@@ -83,5 +83,5 @@ package Grafo;
 		 * @return Rotulo de arco eliminado.
 		 * @throws InvalidEdgeException si arco pasado por parametro es Invalido.
 		 */
-		public E removeEdge(Edge<E> e) throws Exception, Exception;
+		public E removeEdge(Arco e) throws Exception;
 }
