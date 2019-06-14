@@ -1,19 +1,19 @@
 package Actividad15;
 import java.util.ArrayList;
 
-import Grafo.ArcoP;
+import Grafo.ArcoPesado;
 import Grafo.Edge;
 import Grafo.Vertice;
 
 
 public class Pesado {
 	
-		private ArcoP arco;
+		private ArcoPesado arco;
 		private int peso;
 		
 		public Pesado(ArrayList<Vertice> arcoLista, int peso) {
 	
-			this.arco = new ArcoP(arcoLista.get(0), arcoLista.get(1), peso);
+			this.arco = new ArcoPesado(arcoLista.get(0), arcoLista.get(1), peso);
 			this.peso = peso;
 			
 		}

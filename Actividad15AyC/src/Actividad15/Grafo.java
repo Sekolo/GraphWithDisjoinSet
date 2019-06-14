@@ -2,7 +2,7 @@ package Actividad15;
 
 import java.util.ArrayList;
 
-import Grafo.ArcoP;
+import Grafo.ArcoPesado;
 import Grafo.Edge;
 import Grafo.Vertice;
 
@@ -77,7 +77,7 @@ public class Grafo {
 			Vertice v2 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
 			arcoLista.add(v1);
 			arcoLista.add(v2);
-			Edge arco = new ArcoP(v1,v2, ((Double) arcosJson[i][1]).intValue());
+			Edge arco = new ArcoPesado(v1,v2, ((Double) arcosJson[i][1]).intValue());
 			//Pesado pesado = new Pesado(arcoLista, ((Double) arcosJson[i][1]).intValue());
 			this.arcos.add(arco); 
 		}

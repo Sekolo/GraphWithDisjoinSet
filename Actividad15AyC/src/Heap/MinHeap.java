@@ -1,7 +1,7 @@
 package Heap;
 
 //Implementación en Java de la clase MinHeap.
-public class MinHeap {
+public class MinHeap implements Heap{
 	private int [] heap; 
 	private int size; 
 	private int max_size; 
