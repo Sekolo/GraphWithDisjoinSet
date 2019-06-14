@@ -2,6 +2,9 @@ package Grafo;
 
 import java.util.ArrayList;
 
+import GrafoTurbio.ArcoL;
+import GrafoTurbio.VerticeL;
+
 
 public class Grafo implements Graph {
 	
@@ -35,8 +38,12 @@ public class Grafo implements Graph {
 
 
 	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
-		
+		for(Edge a: v.getAdyacentes())
+			if(a.getN1()==w || a.getN2()==v)
+				return true;
+		//si recorre todos los arcos de v y no encuentra, v y w no son ady.
 		return false;
+
 	}
 
 
