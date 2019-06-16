@@ -71,6 +71,7 @@ public class Grafo implements Graph {
 		Vertice v= new Vertice(x);
 		nodos.add(v);
 		
+		
 		return v;
 	}
 
