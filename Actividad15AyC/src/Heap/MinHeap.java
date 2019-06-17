@@ -1,11 +1,11 @@
 package Heap;
 
-import Grafo.Edge;
+import Grafo.Arco;
 import Grafo.ArcoPesado;
 
 //Implementación en Java de la clase MinHeap.
 public class MinHeap implements Heap{
-	private Edge [] heap; 
+	private Arco [] heap; 
 	private int size; 
 	private int max_size; 
 	private static final int FRONT = 1; 
@@ -14,12 +14,12 @@ public class MinHeap implements Heap{
 	{ 
 		this.max_size = max_size; 
 		this.size = 0; 
-		heap = new Edge[this.max_size + 1];
+		heap = new Arco[this.max_size + 1];
 		heap[0] = new ArcoPesado(null, null, Integer.MIN_VALUE); 
 	} 
 
 	//Funcion para insertar elementos en el heap manteniendo las propiedades de la estructura.
-	public void insert(Edge element) 
+	public void insert(Arco element) 
 	{ 
 		if (size < max_size) 
 		{ 
@@ -35,9 +35,9 @@ public class MinHeap implements Heap{
 	} 
 
 	//Función para la extracción del minimo elemento del heap, manteniendo la propiedad de orden del heap.
-	public Edge popMin() 
+	public Arco popMin() 
 	{ 
-		Edge popped = heap[FRONT]; 
+		Arco popped = heap[FRONT]; 
 		heap[FRONT] = heap[size--]; 
 		minHeapify(FRONT); 
 		return popped; 
@@ -64,17 +64,13 @@ public class MinHeap implements Heap{
 	//Función para consultar si elemento es hoja del heap.
 	private boolean isLeaf(int pos) 
 	{ 
-		if (pos >= (size / 2) && pos <= size) 
-		{ 
-			return true; 
-		} 
-		return false; 
+		return (pos >= (size / 2) && pos <= size);
 	} 
 
 	//Función para intercambiar de lugar dos elementos.
 	private void swap(int fpos, int spos) 
 	{ 
-		Edge tmp; 
+		Arco tmp; 
 		tmp = heap[fpos]; 
 		heap[fpos] = heap[spos]; 
 		heap[spos] = tmp; 

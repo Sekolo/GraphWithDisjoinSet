@@ -3,121 +3,101 @@ package Actividad15;
 
 import java.util.ArrayList;
 
+import Cola.ColaImp;
+import DisjoinSet.DisjoinSetImp;
+import DisjoinSet.DisjoinSet;
 import Cola.Cola;
-import Grafo.Edge;
-import Grafo.Vertex;
+import Grafo.Arco;
+import Grafo.Vertice;
+import Grafo.Grafo;
+import Heap.Heap;
+import Heap.MinHeap;
 
 public class Utilidades {
 	
 	private boolean[] visitados;
-	private ArrayList<Vertex> MisVertices;
-	private int CantVertices;
-	private ArrayList<Edge> MisArcos;
-	private int CantArcos;
-	
-	public  Utilidades(ArrayList<Vertex> vertices, ArrayList<Edge> arcos)
-	{
-		
-		visitados=new boolean[vertices.size()];
-		MisVertices=vertices;
-		CantVertices=vertices.size();
-		MisArcos=arcos;
-		CantArcos=arcos.size();
-	}
 	
 	public boolean BFS (Grafo G)
 	{
 		int conexo=0;
 		boolean Esconexo=true;
 		int i=0;
-		for (int j=0; j<CantVertices; j++)
+		visitados=new boolean[G.getVerticesCount()];
+		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
-			
 
-		while (i<CantVertices && Esconexo)
+		while (i<G.getVerticesCount() && Esconexo)
 		{		
 			if (!visitados[i])
 			{ 
-				//visitados[i]=true;
 				conexo++;
 				if(conexo==1)
 					RecorridoNivel(G,i);
 				else
 					Esconexo=false;
-				
 			}
 			i++;
 		}
 		return Esconexo;
-		
 	}
-	
 	
 	private void RecorridoNivel (Grafo G,int i)
 	{
-		Cola<Vertex> Q = new Cola<Vertex>(G.getNodosCount());
+		Cola Q = new ColaImp(G.getVerticesCount());
 		visitados[i]=true;
-		Q.enqueue(MisVertices.get(i));
+		Q.enqueue(G.getVertices().get(i));
 			while (!Q.isEmpty()) 
 			{
 				try
 				{
-					Vertex x1 = Q.dequeue();
-					for(Edge a: x1.getAdyacentes())
+					Vertice x1 = Q.dequeue();
+					for(Arco a: x1.getAdyacentes())
 					{
 						i++;
 						if (!visitados[i]) 
 						visitados[i]=true; 
-						Q.enqueue(a.getN2());
+						Q.enqueue(a.getV2());
 					}
 				} 
 				catch (Exception e) 
 				{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 				}
 			}
 	}
-	//O(|V|+|E|)
 	
-	/*
-	public void kruskalMST(){
-        PriorityQueue<Edge> pq = new PriorityQueue<>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
+	public void Kruskal(Grafo G){
+		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
+		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+        Heap heap = new MinHeap(G.getArcosCount());
+        DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
+        ArrayList<Arco> amc = new ArrayList<>();
 
-        //add all the edges to priority queue, //sort the edges on weights
-        for (int i = 0; i <allEdges.size() ; i++) {
-            pq.add(allEdges.get(i));
+        //Inicializo el Heap con todos los arcos.
+        for (int i = 0; i < G.getArcosCount() ; i++) {
+            heap.insert(G.getArcos().get(i));
         }
 
-        //create a parent []
-        int [] parent = new int[vertices];
-
-        //makeset
-        makeSet(parent);
-
-        ArrayList<Edge> mst = new ArrayList<>();
-
-        //process vertices - 1 edges
+        //Recorro todos los vertices.
         int index = 0;
-        while(index<vertices-1){
-            Edge edge = pq.remove();
+        while(index < G.getVerticesCount()-1){
+        	//Tomo el arco de menor peso
+            Arco edge = heap.popMin();
+            
             //check if adding this edge creates a cycle
-            int x_set = find(parent, edge.source);
-            int y_set = find(parent, edge.destination);
+            //Checkeo a que set pertenece cada vertice del arco.
+            int v1_set = ds.findSet(edge.getV1().element());
+            int v2_set = ds.findSet(edge.getV2().element());
 
-            if(x_set==y_set){
-                //ignore, will create cycle
-            }else {
-                //add it to our final result
-                mst.add(edge);
+            //Si son diferentes los uno
+            //Sino no los uno para evitar ciclos.
+            if(v1_set!=v2_set){
+            	amc.add(edge);
                 index++;
-                union(parent,x_set,y_set);
+                ds.union(v1_set,v2_set);
             }
         }
-        //print MST
-        System.out.println("Minimum Spanning Tree: ");
-        printGraph(mst);
-    }*/
+    }
 }
 
 

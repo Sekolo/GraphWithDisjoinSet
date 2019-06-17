@@ -1,22 +1,22 @@
 package Grafo;
 
-public class ArcoPesado implements Edge  {
+public class ArcoPesado implements Arco  {
 
-		private Vertex vertice1;
-		private Vertex vertice2;
+		private Vertice vertice1;
+		private Vertice vertice2;
 		private int peso;
 		
-		public ArcoPesado(Vertex i, Vertex j, int p) {	
+		public ArcoPesado(Vertice i, Vertice j, int p) {	
 			this.vertice1 = i;
 			this.vertice2 = j;
 			peso = p;
 		}
 		
-		public Vertex getV1() {
+		public Vertice getV1() {
 			return vertice1;
 		}
 		
-		public Vertex getV2() {
+		public Vertice getV2() {
 			return vertice2;
 		}
 		

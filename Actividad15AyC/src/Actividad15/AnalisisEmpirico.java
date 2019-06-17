@@ -1,10 +1,15 @@
 package Actividad15;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.PriorityQueue;
 import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import DisjoinSet.DisjoinSet;
+import DisjoinSet.DisjoinSetImp;
+import Grafo.Grafo;
+import Grafo.GrafoImp;
+import Grafo.GrafoJson;
 
 public class AnalisisEmpirico{
 		
@@ -13,7 +18,7 @@ public class AnalisisEmpirico{
 			try{
 				Grafo grafo = getGrafo(5,4);
 				
-				System.out.println("Grafo conexo con "+ grafo.getNodosCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
+				System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
 				
 				
@@ -47,8 +52,8 @@ public class AnalisisEmpirico{
 			System.out.println("Tengo el grafo en formato JSON. Lo convierto...");
 			Gson gson = new GsonBuilder().create();
 			try{
-				Grafo.GrafoObj gr = gson.fromJson(jsonString, Grafo.GrafoObj.class);
-				return new Grafo(gr);
+				GrafoJson gr = gson.fromJson(jsonString, GrafoJson.class);
+				return new GrafoImp(gr);
 			} catch (Exception e) {
 				System.out.print("Cortó");
 				throw new Exception(jsonString);
@@ -65,7 +70,7 @@ public class AnalisisEmpirico{
 		}
 		
 		private static void conexo(Grafo g) {
-			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
+			DisjoinSet conj=  new DisjoinSetImp(g.getVerticesCount());
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
 				conj.union(g.getArcos().get(i).getV1().element(), g.getArcos().get(i).getV2().element());
@@ -78,24 +83,5 @@ public class AnalisisEmpirico{
 				System.out.println("El grafo es NO conexo");
 			
 		}
-		
-		/*
-		private static boolean spereTree(Grafo g) {
-			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
-			
-			
-			PriorityQueue<ArcoPesado> minHeap = new PriorityQueue<ArcoPesado>();
-			
-			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				//minHeap.add(g.getArcos().get(i));
-			}
-			
-			for (int i = 0; i < g.getArcos().size(); i++ ) {
-			}
-			
-			return true;
-		
-		
-		}*/
 		
 	}

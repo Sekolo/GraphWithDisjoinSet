@@ -1,61 +1,40 @@
 package Cola;
+/**
+ * Interface Queue
+ */
+import Grafo.Vertice;
 
-
-
-
-public class Cola<Vertice> implements Queue<Vertice> {
-	//	<<		Atributos de instancia		>>
-	private Vertice[] A;
-	private int front, rear, cant;
+public interface Cola
+{
+	/**
+	 * Devuelve la cantidad de elementos en la cola.
+	 * @return Cantidad de elementos en la cola.
+	 */
+	public int size();
 	
-	//	<<		Constructor		>>
-	public Cola (int s){
-		front=0;
-		rear=0;
-		cant=0;
-		A=(Vertice[]) new Object[s];
-	}
-	//	<<		Comandos		>>
-	public void enqueue(Vertice e)
-	{
-		//esta lleno
-		if(cant== A.length)
-		{
-			Vertice[] aux= (Vertice[]) new Object[cant+1];
-			for(int i=0; i<cant; i++)
-				aux[i]= A[i];
-			A= null;
-			A= aux;
-			}
-		A[rear]= e;
-		rear=rear+1;
-		cant++;
-	}
-	public Vertice front() throws Exception{
-		if(cant==0)
-			throw new Exception("Error, cola vacia");
-		else
-			return A[front];
-	}
+	/**
+	 * Consulta si la cola está vacía.
+	 * @return Verdadero si la cola está vacía, falso en caso contrario.
+	 */
+	public boolean isEmpty();
 	
-	public Vertice dequeue() throws Exception{
-		if (cant==0)
-			throw new Exception("Error, cola vacia");
-		else{
-			Vertice aux= A[front];
-			A[front]=null;
-			//lo maté =)
-		    front=front+1;
-			cant--;
-			return aux;
-		}
-	}
-	//	<<		Consultas		>>
-	public boolean isEmpty(){
-		return cant==0;
-	}
+	/**
+	 * Inspecciona el elemento que se encuentra en el frente de la cola.
+	 * @return Elemento que se encuentra en el frente de la cola.
+	 * @throws EmptyQueueException si la cola está vacía.
+	 */
+	public Vertice front() throws Exception;
 	
-	public int size(){
-		return cant;
-	}
+	/**
+	 * Inserta un elemento en el fondo de la cola.
+	 * @param element Nuevo elemento a insertar.
+	 */
+	public void enqueue(Vertice element);
+	
+	/**
+	 * Remueve el elemento en el frente de la cola.
+	 * @return Elemento removido.
+	 * @throws EmptyQueueException si la cola está vacía.
+	 */
+	public Vertice dequeue() throws Exception;
 }

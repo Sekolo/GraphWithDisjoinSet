@@ -8,8 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import Grafo.ArcoPesado;
-import Grafo.Edge;
-import Grafo.Vertice;
+import Grafo.Arco;
+import Grafo.VerticeImp;
 
 public class JsonToGrafo {
 	
@@ -41,22 +41,22 @@ public class JsonToGrafo {
 	public static void createG(GrafoObj grafoJson){
 			
 		int[] nodos;
-		ArrayList<Edge> arcos;
+		ArrayList<Arco> arcos;
 			
 		nodos = grafoJson.nodos;
-		arcos = new ArrayList<Edge>();
+		arcos = new ArrayList<Arco>();
 			
 		Object[][] arcosJson = grafoJson.arcos;
 			
 		for (int i = 0; i < arcosJson.length; i++){
 				
-			ArrayList<Vertice> arcoLista = new ArrayList<>(); 
+			ArrayList<VerticeImp> arcoLista = new ArrayList<>(); 
 				
-			Vertice v1 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
-			Vertice v2 = new Vertice(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
+			VerticeImp v1 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
+			VerticeImp v2 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
 			arcoLista.add(v1);
 			arcoLista.add(v2);
-			Edge arco = new ArcoPesado(v1,v2, ((Double) arcosJson[i][1]).intValue());
+			Arco arco = new ArcoPesado(v1,v2, ((Double) arcosJson[i][1]).intValue());
 				
 			arcos.add(arco); 
 		}
