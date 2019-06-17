@@ -124,7 +124,7 @@ public class Utilidades {
 				try {
 					Vertice x1 = Q.dequeue();
 					for(Arco a: x1.getAdyacentes()) {
-						i++;
+						i=a.getV2().element();
 						if (!visitados[i])
 						{
 							visitados[i]=true;
