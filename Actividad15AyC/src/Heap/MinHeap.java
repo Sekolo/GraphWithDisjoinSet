@@ -1,8 +1,11 @@
 package Heap;
 
+import Grafo.Edge;
+import Grafo.ArcoPesado;
+
 //Implementación en Java de la clase MinHeap.
 public class MinHeap implements Heap{
-	private int [] heap; 
+	private Edge [] heap; 
 	private int size; 
 	private int max_size; 
 	private static final int FRONT = 1; 
@@ -11,19 +14,19 @@ public class MinHeap implements Heap{
 	{ 
 		this.max_size = max_size; 
 		this.size = 0; 
-		heap = new int[this.max_size + 1]; 
-		heap[0] = Integer.MIN_VALUE; 
+		heap = new Edge[this.max_size + 1];
+		heap[0] = new ArcoPesado(null, null, Integer.MIN_VALUE); 
 	} 
 
 	//Funcion para insertar elementos en el heap manteniendo las propiedades de la estructura.
-	public void insert(int element) 
+	public void insert(Edge element) 
 	{ 
 		if (size < max_size) 
 		{ 
 			heap[++size] = element; 
 			int current = size; 
 	
-			while (heap[current] < heap[parent(current)]) 
+			while (heap[current].getPeso() < heap[parent(current)].getPeso()) 
 			{ 
 				swap(current, parent(current)); 
 				current = parent(current); 
@@ -32,9 +35,9 @@ public class MinHeap implements Heap{
 	} 
 
 	//Función para la extracción del minimo elemento del heap, manteniendo la propiedad de orden del heap.
-	public int popMin() 
+	public Edge popMin() 
 	{ 
-		int popped = heap[FRONT]; 
+		Edge popped = heap[FRONT]; 
 		heap[FRONT] = heap[size--]; 
 		minHeapify(FRONT); 
 		return popped; 
@@ -71,7 +74,7 @@ public class MinHeap implements Heap{
 	//Función para intercambiar de lugar dos elementos.
 	private void swap(int fpos, int spos) 
 	{ 
-		int tmp; 
+		Edge tmp; 
 		tmp = heap[fpos]; 
 		heap[fpos] = heap[spos]; 
 		heap[spos] = tmp; 
@@ -82,9 +85,9 @@ public class MinHeap implements Heap{
 	{ 
 		if (!isLeaf(pos)) 
 		{ 
-			if (heap[pos] > heap[leftChild(pos)] || heap[pos] > heap[rightChild(pos)]) 
+			if (heap[pos].getPeso() > heap[leftChild(pos)].getPeso() || heap[pos].getPeso() > heap[rightChild(pos)].getPeso()) 
 			{ 
-				if (heap[leftChild(pos)] < heap[rightChild(pos)]) 
+				if (heap[leftChild(pos)].getPeso() < heap[rightChild(pos)].getPeso()) 
 				{ 
 					swap(pos, leftChild(pos)); 
 					minHeapify(leftChild(pos)); 

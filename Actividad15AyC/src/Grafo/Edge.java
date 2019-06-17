@@ -2,9 +2,9 @@ package Grafo;
 
 public interface Edge {
 	
-	public Vertice  getN1();
+	public Vertex getV1();
 	
-	public Vertice getN2();
+	public Vertex getV2();
 	
-	public int getValue();
+	public int getPeso();
 }

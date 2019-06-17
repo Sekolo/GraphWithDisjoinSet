@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Vertice implements Vertex {
 	private int rotulo;
 	private ArrayList<Edge> adyacentes;
-	//private Position<VerticeL<V,E>> posicionEnNodos;
 	
 	public Vertice(int rot) {
 		rotulo = rot;

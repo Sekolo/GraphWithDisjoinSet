@@ -6,9 +6,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-
-	public class AnalisisEmpirico{
+public class AnalisisEmpirico{
 		
 		public static void main(String[] args) throws IOException {
 			
@@ -52,6 +50,7 @@ import com.google.gson.GsonBuilder;
 				Grafo.GrafoObj gr = gson.fromJson(jsonString, Grafo.GrafoObj.class);
 				return new Grafo(gr);
 			} catch (Exception e) {
+				System.out.print("Cortó");
 				throw new Exception(jsonString);
 			}
 		}
@@ -60,7 +59,7 @@ import com.google.gson.GsonBuilder;
 		private static void ver(Grafo g) {
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				System.out.println("nodo "+g.getArcos().get(i).getN1().element()+" arco con "+ g.getArcos().get(i).getN2().element());
+				System.out.println("nodo "+g.getArcos().get(i).getV1().element()+" arco con "+ g.getArcos().get(i).getV2().element());
 				
 			}
 		}
@@ -69,7 +68,7 @@ import com.google.gson.GsonBuilder;
 			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				conj.union(g.getArcos().get(i).getN1().element(), g.getArcos().get(i).getN2().element());
+				conj.union(g.getArcos().get(i).getV1().element(), g.getArcos().get(i).getV2().element());
 				
 			}
 			
@@ -80,12 +79,12 @@ import com.google.gson.GsonBuilder;
 			
 		}
 		
-		
+		/*
 		private static boolean spereTree(Grafo g) {
 			DisjoinSet conj=  new DisjoinSet(g.getNodosCount());
 			
 			
-			PriorityQueue<Pesado> minHeap = new PriorityQueue<Pesado>();
+			PriorityQueue<ArcoPesado> minHeap = new PriorityQueue<ArcoPesado>();
 			
 			for (int i = 0; i < g.getArcos().size(); i++ ) {
 				//minHeap.add(g.getArcos().get(i));
@@ -97,6 +96,6 @@ import com.google.gson.GsonBuilder;
 			return true;
 		
 		
-		}
+		}*/
 		
 	}

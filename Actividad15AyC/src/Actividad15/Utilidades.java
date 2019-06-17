@@ -5,20 +5,24 @@ import java.util.ArrayList;
 
 import Cola.Cola;
 import Grafo.Edge;
-import Grafo.Vertice;
+import Grafo.Vertex;
 
 public class Utilidades {
 	
 	private boolean[] visitados;
-	private ArrayList<Vertice> MisVertices;
+	private ArrayList<Vertex> MisVertices;
 	private int CantVertices;
+	private ArrayList<Edge> MisArcos;
+	private int CantArcos;
 	
-	public  Utilidades(int cant,ArrayList<Vertice>ver)
+	public  Utilidades(ArrayList<Vertex> vertices, ArrayList<Edge> arcos)
 	{
 		
-		visitados=new boolean[cant];
-		MisVertices=ver;
-		CantVertices=cant;
+		visitados=new boolean[vertices.size()];
+		MisVertices=vertices;
+		CantVertices=vertices.size();
+		MisArcos=arcos;
+		CantArcos=arcos.size();
 	}
 	
 	public boolean BFS (Grafo G)
@@ -51,14 +55,14 @@ public class Utilidades {
 	
 	private void RecorridoNivel (Grafo G,int i)
 	{
-		Cola<Vertice> Q = new Cola<Vertice>(G.getNodosCount());
+		Cola<Vertex> Q = new Cola<Vertex>(G.getNodosCount());
 		visitados[i]=true;
 		Q.enqueue(MisVertices.get(i));
 			while (!Q.isEmpty()) 
 			{
 				try
 				{
-					Vertice x1 =  (Vertice) Q.dequeue();
+					Vertex x1 = Q.dequeue();
 					for(Edge a: x1.getAdyacentes())
 					{
 						i++;
@@ -75,7 +79,45 @@ public class Utilidades {
 			}
 	}
 	//O(|V|+|E|)
+	
+	/*
+	public void kruskalMST(){
+        PriorityQueue<Edge> pq = new PriorityQueue<>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
 
+        //add all the edges to priority queue, //sort the edges on weights
+        for (int i = 0; i <allEdges.size() ; i++) {
+            pq.add(allEdges.get(i));
+        }
+
+        //create a parent []
+        int [] parent = new int[vertices];
+
+        //makeset
+        makeSet(parent);
+
+        ArrayList<Edge> mst = new ArrayList<>();
+
+        //process vertices - 1 edges
+        int index = 0;
+        while(index<vertices-1){
+            Edge edge = pq.remove();
+            //check if adding this edge creates a cycle
+            int x_set = find(parent, edge.source);
+            int y_set = find(parent, edge.destination);
+
+            if(x_set==y_set){
+                //ignore, will create cycle
+            }else {
+                //add it to our final result
+                mst.add(edge);
+                index++;
+                union(parent,x_set,y_set);
+            }
+        }
+        //print MST
+        System.out.println("Minimum Spanning Tree: ");
+        printGraph(mst);
+    }*/
 }
 
 

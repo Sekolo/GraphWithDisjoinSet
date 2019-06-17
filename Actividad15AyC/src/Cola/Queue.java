@@ -1,13 +1,9 @@
 package Cola;
-
-
-
-
 /**
  * Interface Queue
  */
 
-public interface Queue <Vertice>
+public interface Queue <Vertex>
 {
 	/**
 	 * Devuelve la cantidad de elementos en la cola.
@@ -26,18 +22,18 @@ public interface Queue <Vertice>
 	 * @return Elemento que se encuentra en el frente de la cola.
 	 * @throws EmptyQueueException si la cola está vacía.
 	 */
-	public Vertice front() throws Exception;
+	public Vertex front() throws Exception;
 	
 	/**
 	 * Inserta un elemento en el fondo de la cola.
 	 * @param element Nuevo elemento a insertar.
 	 */
-	public void enqueue(Vertice element);
+	public void enqueue(Vertex element);
 	
 	/**
 	 * Remueve el elemento en el frente de la cola.
 	 * @return Elemento removido.
 	 * @throws EmptyQueueException si la cola está vacía.
 	 */
-	public Vertice dequeue() throws Exception;
+	public Vertex dequeue() throws Exception;
 }
