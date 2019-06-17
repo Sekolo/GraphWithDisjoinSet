@@ -100,7 +100,108 @@ public class Utilidades {
         
         return amc;
     }
-}
+	
+	public void RecorridoBFS (Grafo G)
+	{
+		int i=0;
+		visitados=new boolean[G.getVerticesCount()];
+		for (int j=0; j<G.getVerticesCount(); j++)
+			visitados[j] = false;
+
+		while (i<G.getVerticesCount())
+		{		
+			if (!visitados[i])
+				MostrarGrafo(G,i);
+			i++;
+		}
+		
+	}
+	private void MostrarGrafo (Grafo G,int i)
+	{
+		Cola Q = new ColaImp(G.getVerticesCount());
+		visitados[i]=true;
+		Q.enqueue(G.getVertices().get(i));
+			while (!Q.isEmpty()) 
+			{
+				try
+				{
+					Vertice x1 = Q.dequeue();
+					for(Arco a: x1.getAdyacentes())
+					{
+						i++;
+						if (!visitados[i]) 
+						{
+							visitados[i]=true;
+							System.out.print(a.getV1());
+							System.out.print(a.getV2());
+							System.out.print("valor");
+							System.out.print(a.getPeso());
+						}
+						
+						
+						Q.enqueue(a.getV2());
+					}
+				} 
+				catch (Exception e) 
+				{
+						e.printStackTrace();
+				}
+			}
+	}
+	
+	
+	int partition(int arr[], int low, int high) 
+	{ 
+		int pivot = arr[high]; 
+		int i = (low-1); // index of smaller element 
+		for (int j=low; j<high; j++) 
+		{ 
+			// If current element is smaller than or 
+			// equal to pivot 
+			if (arr[j] <= pivot) 
+			{ 
+				i++; 
+
+				// swap arr[i] and arr[j] 
+				int temp = arr[i]; 
+				arr[i] = arr[j]; 
+				arr[j] = temp; 
+			} 
+		} 
+
+		// swap arr[i+1] and arr[high] (or pivot) 
+		int temp = arr[i+1]; 
+		arr[i+1] = arr[high]; 
+		arr[high] = temp; 
+
+		return i+1; 
+	} 
+
+
+	/* The main function that implements QuickSort() 
+	arr[] --> Arreglo a ordenar, 
+	low --> index inicial, 
+	high --> index final */
+	void sort(int arr[], int low, int high) 
+	{ 
+		if (low < high) 
+		{ 
+			/* pi is partitioning index, arr[pi] is 
+			now at right place */
+			int pi = partition(arr, low, high); 
+
+			// Recursively sort elements before 
+			// partition and after partition 
+			sort(arr, low, pi-1); 
+			sort(arr, pi+1, high); 
+		} 
+	} 
+
+	
+
+	 
+} 
+
 
 
 
