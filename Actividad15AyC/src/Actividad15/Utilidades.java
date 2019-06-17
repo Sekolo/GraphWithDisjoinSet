@@ -66,7 +66,7 @@ public class Utilidades {
 			}
 	}
 	
-	public void Kruskal(Grafo G){
+	public ArrayList<Arco> Kruskal(Grafo G){
 		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
 		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
         Heap heap = new MinHeap(G.getArcosCount());
@@ -97,6 +97,8 @@ public class Utilidades {
                 ds.union(v1_set,v2_set);
             }
         }
+        
+        return amc;
     }
 }
 
