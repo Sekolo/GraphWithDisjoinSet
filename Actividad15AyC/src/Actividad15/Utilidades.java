@@ -20,7 +20,7 @@ public class Utilidades {
 	public boolean BFS (Grafo G)
 	{
 		int conexo=0;
-		boolean Esconexo=true;
+		boolean Esconexo = true;
 		int i=0;
 		visitados=new boolean[G.getVerticesCount()];
 		for (int j=0; j<G.getVerticesCount(); j++)
@@ -75,7 +75,7 @@ public class Utilidades {
 
         //Inicializo el Heap con todos los arcos.
         for (int i = 0; i < G.getArcosCount() ; i++) {
-            heap.insert(G.getArcos().get(i));
+          //  heap.insert(G.getArcos().get(i));
         }
 
         //Recorro todos los vertices.
@@ -108,28 +108,24 @@ public class Utilidades {
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
 
-		while (i<G.getVerticesCount())
-		{		
+		while (i < G.getVerticesCount())  {
+			
 			if (!visitados[i])
 				MostrarGrafo(G,i);
 			i++;
 		}
 		
 	}
-	private void MostrarGrafo (Grafo G,int i)
-	{
+	private void MostrarGrafo (Grafo G,int i) {
 		Cola Q = new ColaImp(G.getVerticesCount());
 		visitados[i]=true;
 		Q.enqueue(G.getVertices().get(i));
-			while (!Q.isEmpty()) 
-			{
-				try
-				{
+			while (!Q.isEmpty())  {
+				try {
 					Vertice x1 = Q.dequeue();
-					for(Arco a: x1.getAdyacentes())
-					{
+					for(Arco a: x1.getAdyacentes()) {
 						i++;
-						if (!visitados[i]) 
+						if (!visitados[i])
 						{
 							visitados[i]=true;
 							System.out.print(a.getV1());

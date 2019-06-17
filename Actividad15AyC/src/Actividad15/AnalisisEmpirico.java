@@ -16,11 +16,12 @@ import Grafo.GrafoJson;
 public class AnalisisEmpirico{
 	
 	private static Utilidades uti = new Utilidades() ;
+	private static JsonToGrafo builder = new JsonToGrafo();
 		
 		public static void main(String[] args) throws IOException {
 			
 			try{
-				Grafo grafo = getGrafo(5,5);
+				/*Grafo grafo = getGrafo(5,5);
 				
 				System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
@@ -32,7 +33,16 @@ public class AnalisisEmpirico{
 				else
 					System.out.println("NO es conexo con BFS");
 				
-				ver(grafo);
+				ver(grafo);*/
+				Grafo grafo = builder.getGrafo(15,15,false);
+				
+				uti.RecorridoBFS(grafo);
+				
+				/*if (uti.BFS(grafo)) 
+					System.out.println("es conexo con BFS");
+				else
+					System.out.println("NO es conexo con BFS");*/
+				
 				
 				
 				
@@ -72,11 +82,17 @@ public class AnalisisEmpirico{
 		}
 		
 		
+		
+		
+		
 		private static void ver(Grafo g) {
 			
-			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				System.out.println("nodo "+g.getArcos().get(i).getV1().element()+" arco con "+ g.getArcos().get(i).getV2().element()+" Valor: "+ g.getArcos().get(i).getPeso());
-			}
+			//for (int i = 0; i < g.getArcos().size(); i++ ) {
+				//System.out.println("nodo "+g.getArcos().get(i).getV1().element()+" arco con "+ g.getArcos().get(i).getV2().element()+" Valor: "+ g.getArcos().get(i).getPeso());
+			//}
+			
+			
+			
 			
 			System.out.println("-------------------------------------------");
 			System.out.println("kruskal:");
@@ -97,10 +113,10 @@ public class AnalisisEmpirico{
 		private static void conexo(Grafo g) {
 			DisjoinSet conj=  new DisjoinSetImp(g.getVerticesCount());
 			
-			for (int i = 0; i < g.getArcos().size(); i++ ) {
-				conj.union(g.getArcos().get(i).getV1().element(), g.getArcos().get(i).getV2().element());
+			//for (int i = 0; i < g.getArcos().size(); i++ ) {
+			//	conj.union(g.getArcos().get(i).getV1().element(), g.getArcos().get(i).getV2().element());
 				
-			}
+			//}
 			
 			if (conj.conexo())
 				System.out.println("El grafo es conexo");

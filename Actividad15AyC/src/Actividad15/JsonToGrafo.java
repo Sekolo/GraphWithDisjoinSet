@@ -8,12 +8,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import Grafo.ArcoPesado;
+import Grafo.Grafo;
+import Grafo.GrafoImp;
+import Grafo.Vertice;
 import Grafo.Arco;
 import Grafo.VerticeImp;
 
 public class JsonToGrafo {
 	
-	public static void getGrafo(int nodos, int arcos, boolean conx ) throws Exception {
+	public Grafo getGrafo(int nodos, int arcos, boolean conx) throws Exception {
 	
 		String consulta;
 
@@ -32,34 +35,51 @@ public class JsonToGrafo {
 		Gson gson = new GsonBuilder().create();
 		try{
 			GrafoObj gr = gson.fromJson(jsonString, GrafoObj.class);
-			createG(gr);
+			return createG(gr);
 		} catch (Exception e) {
 			throw new Exception(jsonString);
 		}
 	}
 		
-	public static void createG(GrafoObj grafoJson){
+	private static Grafo createG(GrafoObj grafoJson){
 			
-		int[] nodos;
+		ArrayList<Vertice> vertices = new ArrayList<Vertice>();
 		ArrayList<Arco> arcos;
+		
+		for(int i = 0; i < grafoJson.nodos.length; i++) {
+			Vertice v = new VerticeImp(i);
+			vertices.add(i,v);
+		}
 			
-		nodos = grafoJson.nodos;
+
 		arcos = new ArrayList<Arco>();
 			
 		Object[][] arcosJson = grafoJson.arcos;
 			
 		for (int i = 0; i < arcosJson.length; i++){
 				
-			ArrayList<VerticeImp> arcoLista = new ArrayList<>(); 
+			//ArrayList<Vertice> arcoLista = new ArrayList<>(); 
 				
-			VerticeImp v1 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
-			VerticeImp v2 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
-			arcoLista.add(v1);
-			arcoLista.add(v2);
-			Arco arco = new ArcoPesado(v1,v2, ((Double) arcosJson[i][1]).intValue());
+			//VerticeImp v1 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
+			//VerticeImp v2 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
+			
+			int posV1 = ((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue();
+			int posV2 = ((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue();
+			
+			Vertice v1 = vertices.get(posV1);
+			Vertice v2 = vertices.get(posV2);
+			
+			//arcoLista.add(v1);
+			//arcoLista.add(v2);
+			Arco arco = new ArcoPesado(v1, v2, ((Double) arcosJson[i][1]).intValue());
 				
-			arcos.add(arco); 
+			v1.addAdyacente(arco);
+			v2.addAdyacente(arco);
+			//arcos.add(arco); 
+		
 		}
+		
+		return new GrafoImp(vertices);
 	}
 			
 	class GrafoObj {

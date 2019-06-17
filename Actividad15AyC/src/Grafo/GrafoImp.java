@@ -6,9 +6,11 @@ public class GrafoImp implements Grafo {
 	private ArrayList<Vertice> vertices;
 	private ArrayList<Arco> arcos;
 	
-	public ArrayList<Arco> getArcos() {
-		return arcos;
+	
+	public GrafoImp(ArrayList<Vertice> vert){
+		vertices = vert;
 	}
+	
 	
 	public ArrayList<Vertice> getVertices() {
 		return vertices;
@@ -22,7 +24,62 @@ public class GrafoImp implements Grafo {
 		return arcos.size();
 	}
 	
+	public Vertice opposite(Vertice v, Arco e) throws Exception  {
+		if(e.getV1() == v)
+			return e.getV2();
+		else
+			if(e.getV2()==v)
+				return e.getV1();
+			else
+				throw new Exception("Error, vertice o Arco pasado por parametro no se relacionan.");
+	}
 
+
+	public Vertice[] endVertices(Arco e) throws Exception {
+		Vertice[] vert = new Vertice[1];
+		vert[0]= e.getV1();
+		vert[1]= e.getV2();
+		return vert;
+		
+	}
+
+
+	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
+		for(Arco a: v.getAdyacentes())
+			if(a.getV1()==w || a.getV2()==v)
+				return true;
+		//si recorre todos los arcos de v y no encuentra, v y w no son ady.
+		return false;
+
+	}
+	
+
+	public int replace(Vertice v, int x) throws Exception {
+		return 0;
+	}
+
+	public int replace(Arco e, int x) throws Exception {
+		return 0;
+	}
+
+	public Vertice insertVertex(int x) {
+		return null;
+	}
+
+
+	public Arco insertArco(Vertice v, Vertice w, int x) throws Exception {
+		return null;
+	}
+
+	public Vertice removeVertex(Vertice v) throws Exception {
+		return null;
+	}
+
+	public int removeArco(Arco e) throws Exception {
+		return 0;
+	}
+	
+	
 	@SuppressWarnings("rawtypes")
 	public GrafoImp(GrafoJson grafoJson){
 		vertices = new ArrayList<Vertice>();
@@ -41,4 +98,6 @@ public class GrafoImp implements Grafo {
 			arcos.add(arco); 
 		}
 	}
+	
+	
 }

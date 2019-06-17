@@ -7,9 +7,9 @@ public class DisjoinSetImp implements DisjoinSet{
 	public DisjoinSetImp(int n) {
 		padre = new int [n];
 		rank = new int[n];
-		for (int i=0; i<n;i++ ) {
+		/*for (int i=0; i<n;i++ ) {
 			makeSet(i);
-		}	
+		}	*/
 	}
 	
 	public void  makeSet(Integer n){
