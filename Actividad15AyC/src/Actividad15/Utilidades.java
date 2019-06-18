@@ -24,17 +24,19 @@ public class Utilidades {
 	
 	public boolean BFS (Grafo G)
 	{
+		
 		boolean Esconexo = true;
 		int i=0;
+		// Genero mi arreglo de visitados
 		setVisitados(G.getVerticesCount());
-		
+		// Seteo todos los visitados como false
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
-
+		
 		while (i<G.getVerticesCount() && Esconexo)
-		{		
+		{		// Accede con i=0 
 			if (!visitados[i])
-			{ 
+			{ //Si accede mas de una vez no es conexo
 				if(i!=0) { 
 					Esconexo = false;
 				}
@@ -50,24 +52,26 @@ public class Utilidades {
 	public void RecorridoNivel(Grafo G)
 	{
 		LinkedList<Vertice> queue = new LinkedList<Vertice>();
+		// Obtengo el primer vertice
 		Vertice v = G.getVertices().get(0);
 		queue.add(v);
 		visitados[v.element()]=true;
+		// Hasta que la cola sea vacia
 		while (queue.size() != 0) {	
 			Vertice s = queue.poll(); 
 			for(int i = 0; i < G.getVertices().size(); i++) {
 				
 				Vertice n = G.getVertices().get(i); 
 				if (!visitados[n.element()])  {
-	        	
+	        	// Seteo cada adyacente como visitado 
+				// Agrego a la queue cada vertice ady
 					for (int j = 0; j < n.getAdyacentes().size(); j++) {
 	        		
 						visitados[n.element()] = true; 
 						queue.add(n); 
 						
 					}
-					//visitados[n.element()] = true; 
-					//queue.add(n); 
+					
 				}
 			}
 		} 
@@ -198,45 +202,39 @@ public class Utilidades {
 	}
 	
 	
-	int partition(int arr[], int low, int high) { 
-		int pivot = arr[high]; 
+	int partition(int A[], int low, int high) { 
+		int pivote = A[high]; 
 		int i = (low-1); // index of smaller element 
 		for (int j=low; j<high; j++)  { 
-			// If current element is smaller than or 
-			// equal to pivot 
-			if (arr[j] <= pivot) { 
+			// Si es elemento es mas chico o igual a pivote 
+			if (A[j] <= pivote) { 
 				i++; 
 
-				// swap arr[i] and arr[j] 
-				int temp = arr[i]; 
-				arr[i] = arr[j]; 
-				arr[j] = temp; 
+				// intercambio A[i] and A[j] 
+				int temp = A[i]; 
+				A[i] = A[j]; 
+				A[j] = temp; 
 			} 
 		} 
 
-		// swap arr[i+1] and arr[high] (or pivot) 
-		int temp = arr[i+1]; 
-		arr[i+1] = arr[high]; 
-		arr[high] = temp; 
+		// intercambio  A[i+1] and A[high] (o pivote) 
+		int temp = A[i+1]; 
+		A[i+1] = A[high]; 
+		A[high] = temp; 
 
 		return i+1; 
 	} 
 
 
-	/* The main function that implements QuickSort() 
-	arr[] --> Arreglo a ordenar, 
+	/*
+	A[] --> Arreglo a ordenar, 
 	low --> index inicial, 
 	high --> index final */
-	void sort(int arr[], int low, int high) { 
+	void sort(int A[], int low, int high) { 
 		if (low < high) { 
-			/* pi is partitioning index, arr[pi] is 
-			now at right place */
-			int pi = partition(arr, low, high); 
-
-			// Recursively sort elements before 
-			// partition and after partition 
-			sort(arr, low, pi-1); 
-			sort(arr, pi+1, high); 
+			int pi = partition(A, low, high); 
+			sort(A, low, pi-1); 
+			sort(A, pi+1, high); 
 		} 
 	} 
 
