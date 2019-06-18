@@ -1,14 +1,21 @@
 package Grafo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GrafoImp implements Grafo {
 	private ArrayList<Vertice> vertices;
 	private ArrayList<Arco> arcos;
 	
 	
-	public GrafoImp(ArrayList<Vertice> vert){
+	public GrafoImp(ArrayList<Vertice> vert, ArrayList<Arco> arc){
 		vertices = vert;
+		arcos = arc; 
+	}
+	
+	public GrafoImp(ArrayList<Vertice> vert, int c){
+		vertices = vert;
+		arcos = new ArrayList<Arco>(c); 
 	}
 	
 	
@@ -20,8 +27,54 @@ public class GrafoImp implements Grafo {
 		return vertices.size();
 	}
 	
-	public int getArcosCount(){
-		return arcos.size();
+	public ArrayList<Arco> getArcos() {
+		boolean[] visitados;
+		LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
+	
+		visitados = new boolean[this.getVertices().size()];
+	
+		ArrayList<Vertice> verts = this.getVertices();
+	
+		for(int i = 0; i < verts.size() ; i++) {
+			//ds.makeSet(i);
+			visitados[i] = false;
+			//System.out.println("viste el grafo");
+		
+		}
+	
+		try {
+			Vertice s =  verts.get(0);
+			visitados[s.element()] = true; 
+			queue.add(s); 
+		
+			while (queue.size() != 0) {	
+			
+			s = queue.poll(); 
+			
+				for(int i = 0; i < verts.size(); i++) {
+				
+					Vertice n = verts.get(i);
+					if (!visitados[n.element()])  {
+            	
+						for (int j = 0; j < n.getAdyacentes().size(); j++) {
+							System.out.println("entre a los arcos");
+							arcos.add(n.getAdyacentes().get(j));
+							//heap.insert(n.getAdyacentes().get(j));
+							//ds.union(n.element(), G.opposite(n, n.getAdyacentes().get(j)).element());
+						
+						}
+						visitados[n.element()] = true; 
+						queue.add(n); 
+					} 
+				} 
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	return arcos;
+	
 	}
 	
 	public Vertice opposite(Vertice v, Arco e) throws Exception  {
@@ -97,6 +150,12 @@ public class GrafoImp implements Grafo {
 			Arco arco = new ArcoPesado(v1,v2, ((Double) arcosJson[i][1]).intValue());
 			arcos.add(arco); 
 		}
+	}
+
+
+	@Override
+	public int getArcosCount() {
+		return 0;
 	}
 	
 	

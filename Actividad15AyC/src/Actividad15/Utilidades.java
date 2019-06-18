@@ -2,6 +2,7 @@
 package Actividad15;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import Cola.ColaImp;
 import DisjoinSet.DisjoinSetImp;
@@ -69,14 +70,61 @@ public class Utilidades {
 	public ArrayList<Arco> Kruskal(Grafo G){
 		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
 		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+		System.out.println("Esto tiraa el null");
         Heap heap = new MinHeap(G.getArcosCount());
         DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
         ArrayList<Arco> amc = new ArrayList<>();
 
-        //Inicializo el Heap con todos los arcos.
+       /* //Inicializo el Heap con todos los arcos.
         for (int i = 0; i < G.getArcosCount() ; i++) {
           //  heap.insert(G.getArcos().get(i));
-        }
+        }*/
+   
+        System.out.println("arranca kruskal por dentro");
+             
+        LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
+		
+		visitados = new boolean[G.getVertices().size()];
+		
+		ArrayList<Vertice> verts = G.getVertices();
+		
+		for(int i = 0; i < verts.size() ; i++) {
+			ds.makeSet(i);
+			visitados[i] = false;
+			System.out.println("viste el grafo");
+			
+		}
+		
+		try {
+			Vertice s =  verts.get(0);
+			visitados[s.element()]=true; 
+	        queue.add(s); 
+			
+			while (queue.size() != 0) {	
+				
+				s = queue.poll(); 
+				
+				for(int i = 0; i < verts.size(); i++) {
+					
+					Vertice n = verts.get(i);
+					if (!visitados[n.element()])  {
+                	
+						for (int j = 0; j < n.getAdyacentes().size(); j++) {
+							System.out.println("entre a los arcos");
+							heap.insert(n.getAdyacentes().get(j));
+							//ds.union(n.element(), G.opposite(n, n.getAdyacentes().get(j)).element());
+							
+						}
+						visitados[n.element()] = true; 
+						queue.add(n); 
+					} 
+				} 
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+        
 
         //Recorro todos los vertices.
         int index = 0;
@@ -101,8 +149,7 @@ public class Utilidades {
         return amc;
     }
 	
-	public void RecorridoBFS (Grafo G)
-	{
+	public void RecorridoBFS (Grafo G) {
 		int i=0;
 		visitados=new boolean[G.getVerticesCount()];
 		for (int j=0; j<G.getVerticesCount(); j++)
@@ -125,8 +172,7 @@ public class Utilidades {
 					Vertice x1 = Q.dequeue();
 					for(Arco a: x1.getAdyacentes()) {
 						i=a.getV2().element()-1;
-						if (!visitados[i])
-						{
+						if (!visitados[i]) {
 							visitados[i]=true;
 							System.out.print(a.getV1());
 							System.out.print(a.getV2());
@@ -138,24 +184,20 @@ public class Utilidades {
 						Q.enqueue(a.getV2());
 					}
 				} 
-				catch (Exception e) 
-				{
+				catch (Exception e) {
 						e.printStackTrace();
 				}
 			}
 	}
 	
 	
-	int partition(int arr[], int low, int high) 
-	{ 
+	int partition(int arr[], int low, int high) { 
 		int pivot = arr[high]; 
 		int i = (low-1); // index of smaller element 
-		for (int j=low; j<high; j++) 
-		{ 
+		for (int j=low; j<high; j++)  { 
 			// If current element is smaller than or 
 			// equal to pivot 
-			if (arr[j] <= pivot) 
-			{ 
+			if (arr[j] <= pivot) { 
 				i++; 
 
 				// swap arr[i] and arr[j] 
@@ -178,10 +220,8 @@ public class Utilidades {
 	arr[] --> Arreglo a ordenar, 
 	low --> index inicial, 
 	high --> index final */
-	void sort(int arr[], int low, int high) 
-	{ 
-		if (low < high) 
-		{ 
+	void sort(int arr[], int low, int high) { 
+		if (low < high) { 
 			/* pi is partitioning index, arr[pi] is 
 			now at right place */
 			int pi = partition(arr, low, high); 

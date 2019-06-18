@@ -35,7 +35,7 @@ public class JsonToGrafo {
 		Gson gson = new GsonBuilder().create();
 		try{
 			GrafoObj gr = gson.fromJson(jsonString, GrafoObj.class);
-			return createG(gr);
+			return createGF(gr);
 		} catch (Exception e) {
 			throw new Exception(jsonString);
 		}
@@ -54,6 +54,8 @@ public class JsonToGrafo {
 
 		arcos = new ArrayList<Arco>();
 			
+		int cant = 0;
+		
 		Object[][] arcosJson = grafoJson.arcos;
 			
 		for (int i = 0; i < arcosJson.length; i++){
@@ -62,7 +64,7 @@ public class JsonToGrafo {
 				
 			//VerticeImp v1 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue());
 			//VerticeImp v2 = new VerticeImp(((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue());
-			
+			//cant = cant++;
 			int posV1 = ((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue();
 			int posV2 = ((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue();
 			
@@ -79,7 +81,44 @@ public class JsonToGrafo {
 		
 		}
 		
-		return new GrafoImp(vertices);
+		return new GrafoImp(vertices,cant);
+	}
+	
+	
+	private static Grafo createGF(GrafoObj grafoJson){
+		
+		ArrayList<Vertice> vertices = new ArrayList<Vertice>(grafoJson.nodos.length);
+		ArrayList<Arco> arcos;
+		
+		for(int i=0; i < grafoJson.nodos.length; i++) {
+			Vertice v = new VerticeImp(i);
+			vertices.add(i,v);
+		}
+		arcos = new ArrayList<Arco>();
+		
+		ArrayList<Vertice> arcoLista = new ArrayList<>(); 
+		
+		Object[][] arcosJson = grafoJson.arcos;
+		
+		for (int i = 0; i<arcosJson.length; i++){
+			
+			int posV1 = ((Double) ((ArrayList) arcosJson[i][0]).get(0)).intValue();
+			int posV2 = ((Double) ((ArrayList) arcosJson[i][0]).get(1)).intValue();
+			
+			Vertice v1 = vertices.get(posV1);
+			Vertice v2 = vertices.get(posV2);
+			
+			arcoLista.add(v1);
+			arcoLista.add(v2);
+			Arco arco = new ArcoPesado(v1, v2, ((Double) arcosJson[i][1]).intValue());
+			
+			v1.addAdyacente(arco);
+			v2.addAdyacente(arco);
+			arcos.add(arco); 
+			
+		}
+		
+		return new GrafoImp(vertices,arcos);
 	}
 			
 	class GrafoObj {

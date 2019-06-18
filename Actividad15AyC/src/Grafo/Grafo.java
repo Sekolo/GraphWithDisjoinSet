@@ -6,6 +6,8 @@ public interface Grafo {
 	
 	public ArrayList<Vertice> getVertices();
 	
+	public ArrayList<Arco> getArcos();
+	
 	public int getVerticesCount();
 	
 	public int getArcosCount();

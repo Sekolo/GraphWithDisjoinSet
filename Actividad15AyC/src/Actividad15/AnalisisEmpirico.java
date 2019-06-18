@@ -20,11 +20,16 @@ import Grafo.Vertice;
 
 public class AnalisisEmpirico{
 	
-	private static Utilidades uti = new Utilidades() ;
+	//private static Utilidades uti = new Utilidades() ;
 	private static JsonToGrafo builder = new JsonToGrafo();
+	
+	private Grafo grafo;
+	//private static ArrayList<Arco> kruk;
 		
 		public static void main(String[] args) throws IOException {
 			
+			Utilidades uti = new Utilidades() ;
+			ArrayList<Arco> kruk;
 			try{
 				/*Grafo grafo = getGrafo(5,5);
 				
@@ -39,8 +44,17 @@ public class AnalisisEmpirico{
 					System.out.println("NO es conexo con BFS");
 				
 				ver(grafo);*/
-				Grafo grafo = builder.getGrafo(5,4,false);
 				
+				Grafo grafo = builder.getGrafo(5,4,false);	
+				
+				ArrayList<Arco> arco = grafo.getArcos();
+				
+				System.out.println( "Lista de arcos");
+				for(int i = 0; i < arco.size(); i++) {
+					System.out.println( "arco "+i+": El Nodo "+arco.get(i).getV1().element()+
+											" conecta al nodo "+ arco.get(i).getV2().element());
+				}
+				/*
 				Conexo con = new Conexo();
 				
 				if (con.cone(grafo))
@@ -61,7 +75,6 @@ public class AnalisisEmpirico{
 				
 				System.out.println();
 				
-				
 				LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
 				Vertice s =  v.get(0);
 				  
@@ -69,26 +82,22 @@ public class AnalisisEmpirico{
 		        vist[s.element()]=true; 
 		        queue.add(s); 
 		  
-		        while (queue.size() != 0) 
-		        { 
+		        while (queue.size() != 0) { 
 		            // Dequeue a vertex from queue and print it 
 		            s = queue.poll(); 
-		            //System.out.print(s.element()+" "); 
-		  
+		            
 		            // Get all adjacent vertices of the dequeued vertex s 
 		            // If a adjacent has not been visited, then mark it 
 		            // visited and enqueue it 
-		           // Iterator<Vertice> i = v[s].listIterator(); 
+		            // Iterator<Vertice> i = v[s].listIterator(); 
 		            
 		            for(int i = 0; i < v.size(); i++) {
-		            //while (i.hasNext()) 
-		            //{ 
-		                Vertice n = v.get(i); //i.next(); 
+		            
+		                Vertice n = v.get(i); 
 		                if (!vist[n.element()])  {
 		                	
 		                	for (int j = 0; j < n.getAdyacentes().size(); j++) {
-		                		System.out.println( "El nodo "+ i +" tiene los arcos "+grafo.opposite(v.get(i), v.get(i).getAdyacentes().get(j)).element());
-
+		                		System.out.println( "El nodo "+ i +" tiene los arcos "+grafo.opposite(n, n.getAdyacentes().get(j)).element());
 		                	}
 		                    vist[n.element()] = true; 
 		                    queue.add(n); 
@@ -96,7 +105,7 @@ public class AnalisisEmpirico{
 		            } 
 		        }
 		    
-				
+				*/
 				
 				
 				//for(int i = 0; i < v.size(); i++) {
@@ -127,13 +136,22 @@ public class AnalisisEmpirico{
 				else
 					System.out.println("NO es conexo con BFS");*/
 				
-				
-				
+				System.out.println(" llego antes del kruskal.");
+
+		        //kruk = uti.Kruskal(grafo);
+		      
+				//System.out.print(kruk.size()+" tam kruk");
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 			
+			
+			
+			/*System.out.print("Camimo minimo de Kruskal: ");
+			for(int i = 0; i< kruk.size(); i ++) {
+				System.out.print(kruk.get(i)+"-- ");
+			}*/
 			
 			/*
 			 * Generar varios grafos de diferente configuración y buscar 
