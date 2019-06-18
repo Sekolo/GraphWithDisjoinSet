@@ -18,13 +18,14 @@ public class Utilidades {
 	
 	private boolean[] visitados;
 	
+	public void setVisitados(int n) {
+		visitados = new boolean[n];
+	}
+	
 	public boolean BFS (Grafo G)
 	{
-		int conexo=0;
 		boolean Esconexo = true;
 		int i=0;
-		LinkedList<Vertice> queue = new LinkedList<Vertice>();
-		visitados=new boolean[G.getVerticesCount()];
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
 
@@ -32,37 +33,44 @@ public class Utilidades {
 		{		
 			if (!visitados[i])
 			{ 
-				conexo++;
-				if(conexo==1)
-					RecorridoNivel(G,i);
-				else
-					Esconexo=false;
+				if(i!=0) { 
+					Esconexo = false;
+				}
+				else {
+					RecorridoNivel(G);
+				}
 			}
 			i++;
 		}
 		return Esconexo;
 	}
-	public void RecorridoNivel(Grafo G, LinkedList<Vertice> queue)
+	
+	public void RecorridoNivel(Grafo G)
 	{
+		LinkedList<Vertice> queue = new LinkedList<Vertice>();
+		Vertice v = G.getVertices().get(0);
+		queue.add(v);
+		visitados[v.element()]=true;
 		while (queue.size() != 0) {	
-		
-		
 			Vertice s = queue.poll(); 
-		
-    
-		for(int i = 0; i < G.getVertices().size(); i++) {
-			
-			Vertice n = G.getVertices().get(i); 
-			if (!visitados[n.element()])  {
-        	
-				for (int j = 0; j < n.getAdyacentes().size(); j++) {
-        		
-					//disj.union(n.element(),g.opposite(n , n.getAdyacentes().get(j)).element());
-					
+			for(int i = 0; i < G.getVertices().size(); i++) {
+				
+				Vertice n = G.getVertices().get(i); 
+				if (!visitados[n.element()])  {
+	        	
+					for (int j = 0; j < n.getAdyacentes().size(); j++) {
+	        		
+						visitados[n.element()] = true; 
+						queue.add(n); 
+						
+					}
+					//visitados[n.element()] = true; 
+					//queue.add(n); 
 				}
-				visitados[n.element()] = true; 
-				queue.add(n); 
-			} 
+			}
+		} 
+			
+	}
 	
 	public ArrayList<Arco> Kruskal(Grafo G){
 		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
