@@ -23,6 +23,7 @@ public class Utilidades {
 		int conexo=0;
 		boolean Esconexo = true;
 		int i=0;
+		LinkedList<Vertice> queue = new LinkedList<Vertice>();
 		visitados=new boolean[G.getVerticesCount()];
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
@@ -41,31 +42,27 @@ public class Utilidades {
 		}
 		return Esconexo;
 	}
-	
-	private void RecorridoNivel (Grafo G,int i)
+	public void RecorridoNivel(Grafo G, LinkedList<Vertice> queue)
 	{
-		Cola Q = new ColaImp(G.getVerticesCount());
-		visitados[i]=true;
-		Q.enqueue(G.getVertices().get(i));
-			while (!Q.isEmpty()) 
-			{
-				try
-				{
-					Vertice x1 = Q.dequeue();
-					for(Arco a: x1.getAdyacentes())
-					{
-						i++;
-						if (!visitados[i]) 
-						visitados[i]=true; 
-						Q.enqueue(a.getV2());
-					}
-				} 
-				catch (Exception e) 
-				{
-						e.printStackTrace();
+		while (queue.size() != 0) {	
+		
+		
+			Vertice s = queue.poll(); 
+		
+    
+		for(int i = 0; i < G.getVertices().size(); i++) {
+			
+			Vertice n = G.getVertices().get(i); 
+			if (!visitados[n.element()])  {
+        	
+				for (int j = 0; j < n.getAdyacentes().size(); j++) {
+        		
+					//disj.union(n.element(),g.opposite(n , n.getAdyacentes().get(j)).element());
+					
 				}
-			}
-	}
+				visitados[n.element()] = true; 
+				queue.add(n); 
+			} 
 	
 	public ArrayList<Arco> Kruskal(Grafo G){
 		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
@@ -234,7 +231,47 @@ public class Utilidades {
 	} 
 
 	
-
+public boolean cone(Grafo g) {
+		
+		
+		
+		LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
+		
+		visitados = new boolean[g.getVertices().size()];
+		
+		ArrayList<Vertice> verts = g.getVertices();
+		
+		for(int i = 0; i < verts.size() ; i++) {
+			
+			visitados[i] = false;
+		}
+		
+		try {	
+			Vertice s =  verts.get(0);
+			visitados[s.element()]=true; 
+	        queue.add(s); 
+			
+			while (queue.size() != 0) {	
+				
+				
+				s = queue.poll(); 
+				
+            
+				for(int i = 0; i < verts.size(); i++) {
+					
+					Vertice n = verts.get(i); //i.next(); 
+					if (!visitados[n.element()])  {
+                	
+						for (int j = 0; j < n.getAdyacentes().size(); j++) {
+                		
+							disj.union(n.element(),g.opposite(n , n.getAdyacentes().get(j)).element());
+							
+						}
+						visitados[n.element()] = true; 
+						queue.add(n); 
+					} 
+			} 
+        }
 	 
 } 
 
