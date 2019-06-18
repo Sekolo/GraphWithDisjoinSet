@@ -43,7 +43,7 @@ public class JsonToGrafo {
 		
 	private static Grafo createG(GrafoObj grafoJson){
 			
-		ArrayList<Vertice> vertices = new ArrayList<Vertice>();
+		ArrayList<Vertice> vertices = new ArrayList<Vertice>(grafoJson.nodos.length);
 		ArrayList<Arco> arcos;
 		
 		for(int i = 0; i < grafoJson.nodos.length; i++) {

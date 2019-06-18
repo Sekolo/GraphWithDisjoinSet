@@ -1,5 +1,9 @@
 package DisjoinSet;
 
+//import java.util.ArrayList;
+
+import Grafo.Vertice;
+
 public class DisjoinSetImp implements DisjoinSet{
 	private int[] padre;
 	private int[] rank;
@@ -47,6 +51,11 @@ public class DisjoinSetImp implements DisjoinSet{
 				conex = false;
 		}
 		return conex;
+	}
+
+	
+	public int[] getP() {
+		return padre;
 	}
 	
 

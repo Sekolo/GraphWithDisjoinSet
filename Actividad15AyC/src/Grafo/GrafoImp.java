@@ -46,7 +46,7 @@ public class GrafoImp implements Grafo {
 
 	public boolean areAdjacent(Vertice v, Vertice w) throws Exception {
 		for(Arco a: v.getAdyacentes())
-			if(a.getV1()==w || a.getV2()==v)
+			if(a.getV1()== w || a.getV2()== v)
 				return true;
 		//si recorre todos los arcos de v y no encuentra, v y w no son ady.
 		return false;

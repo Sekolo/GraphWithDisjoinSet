@@ -2,16 +2,21 @@ package Actividad15;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import Cola.Cola;
+import Cola.ColaImp;
 import DisjoinSet.DisjoinSet;
 import DisjoinSet.DisjoinSetImp;
 import Grafo.Arco;
 import Grafo.Grafo;
 import Grafo.GrafoImp;
 import Grafo.GrafoJson;
+import Grafo.Vertice;
 
 public class AnalisisEmpirico{
 	
@@ -34,9 +39,88 @@ public class AnalisisEmpirico{
 					System.out.println("NO es conexo con BFS");
 				
 				ver(grafo);*/
-				Grafo grafo = builder.getGrafo(15,15,false);
+				Grafo grafo = builder.getGrafo(5,4,false);
 				
-				uti.RecorridoBFS(grafo);
+				Conexo con = new Conexo();
+				
+				if (con.cone(grafo))
+					System.out.println( "El grafo es Conexo");
+				else
+					System.out.println( "nooooooo es conexoooo!!!! ");
+				
+				ArrayList<Vertice> v = grafo.getVertices();
+				
+				Cola c = new ColaImp(v.size());		
+				boolean [] vist = new boolean[v.size()]; 
+				
+				System.out.print( "Estos son los Vertices: ");
+				for(int i = 0; i < v.size(); i++) {
+					System.out.print( v.get(i).element() + " ");
+					vist[i]= false;
+				}
+				
+				System.out.println();
+				
+				
+				LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
+				Vertice s =  v.get(0);
+				  
+		        // Mark the current node as visited and enqueue it 
+		        vist[s.element()]=true; 
+		        queue.add(s); 
+		  
+		        while (queue.size() != 0) 
+		        { 
+		            // Dequeue a vertex from queue and print it 
+		            s = queue.poll(); 
+		            //System.out.print(s.element()+" "); 
+		  
+		            // Get all adjacent vertices of the dequeued vertex s 
+		            // If a adjacent has not been visited, then mark it 
+		            // visited and enqueue it 
+		           // Iterator<Vertice> i = v[s].listIterator(); 
+		            
+		            for(int i = 0; i < v.size(); i++) {
+		            //while (i.hasNext()) 
+		            //{ 
+		                Vertice n = v.get(i); //i.next(); 
+		                if (!vist[n.element()])  {
+		                	
+		                	for (int j = 0; j < n.getAdyacentes().size(); j++) {
+		                		System.out.println( "El nodo "+ i +" tiene los arcos "+grafo.opposite(v.get(i), v.get(i).getAdyacentes().get(j)).element());
+
+		                	}
+		                    vist[n.element()] = true; 
+		                    queue.add(n); 
+		                } 
+		            } 
+		        }
+		    
+				
+				
+				
+				//for(int i = 0; i < v.size(); i++) {
+//					if (!vist[0] )
+//						//System.out.print( "El nodo "+ i +" ");
+//						c.enqueue(v.get(0));
+//						
+//						while (!c.isEmpty()) {
+//								
+//							Vertice v1 = c.dequeue();
+//							vist[i] = true;
+//							
+//							for (int j = 0; j < v1.getAdyacentes().size(); j++) {
+//								if (!vist[grafo.opposite(v1, v1.getAdyacentes().get(j)).element()]) {
+//									c.enqueue(grafo.opposite(v1, v1.getAdyacentes().get(j)));
+//									//System.out.print( "El nodo "+ i +" tiene los arcos "+ v.get(i).getAdyacentes().get(j).getV2().element()+" a "+v.get(i).getAdyacentes().get(j).getV1().element());
+//									System.out.print( "El nodo "+ i +" tiene los arcos "+grafo.opposite(v.get(i), v.get(i).getAdyacentes().get(j)).element());
+//									System.out.println();
+//								}
+//							}
+//						}
+//				//}
+				
+				//uti.RecorridoBFS(grafo);
 				
 				/*if (uti.BFS(grafo)) 
 					System.out.println("es conexo con BFS");
