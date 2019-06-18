@@ -160,51 +160,12 @@ public class Utilidades {
         return amc;
     }
 	
-	public void RecorridoBFS (Grafo G) {
-		int i=0;
-		visitados=new boolean[G.getVerticesCount()];
-		for (int j=0; j<G.getVerticesCount(); j++)
-			visitados[j] = false;
-
-		while (i < G.getVerticesCount())  {
-			
-			if (!visitados[i])
-				MostrarGrafo(G,i);
-			i++;
-		}
-		
-	}
-	private void MostrarGrafo (Grafo G,int i) {
-		Cola Q = new ColaImp(G.getVerticesCount());
-		visitados[i]=true;
-		Q.enqueue(G.getVertices().get(i));
-			while (!Q.isEmpty())  {
-				try {
-					Vertice x1 = Q.dequeue();
-					for(Arco a: x1.getAdyacentes()) {
-						i=a.getV2().element()-1;
-						if (!visitados[i]) {
-							visitados[i]=true;
-							System.out.print(a.getV1());
-							System.out.print(a.getV2());
-							System.out.print("valor");
-							System.out.print(a.getPeso());
-						}
-						
-						
-						Q.enqueue(a.getV2());
-					}
-				} 
-				catch (Exception e) {
-						e.printStackTrace();
-				}
-			}
-	}
+	
 	
 	
 	int partition(int A[], int low, int high) { 
 		int pivote = A[high]; 
-		int i = (low-1); // index of smaller element 
+		int i = (low-1); // elemento mas pequeno 
 		for (int j=low; j<high; j++)  { 
 			// Si es elemento es mas chico o igual a pivote 
 			if (A[j] <= pivote) { 
@@ -217,7 +178,7 @@ public class Utilidades {
 			} 
 		} 
 
-		// intercambio  A[i+1] and A[high] (o pivote) 
+		// intercambio  A[i+1] and A[high]  
 		int temp = A[i+1]; 
 		A[i+1] = A[high]; 
 		A[high] = temp; 
@@ -240,7 +201,51 @@ public class Utilidades {
 
 	
 
-	 
+	public void RecorridoBFS (Grafo G)
+	{
+		int i=0;
+		// Genero mi arreglo de visitados
+		setVisitados(G.getVerticesCount());
+		// Seteo todos los visitados como false
+		for (int j=0; j<G.getVerticesCount(); j++)
+			visitados[j] = false;
+		
+		while (i<G.getVerticesCount())
+		{		// Para cada Vertice no visitado lo recorro 
+			if (!visitados[i])
+				RecorridoNivel2(G);
+			i++;
+		}
+		
+	}
+	
+	public void RecorridoNivel2(Grafo G)
+	{
+		LinkedList<Vertice> queue = new LinkedList<Vertice>();
+		// Obtengo el primer vertice
+		Vertice v = G.getVertices().get(0);
+		queue.add(v);
+		visitados[v.element()]=true;
+		// Hasta que la cola sea vacia
+		while (queue.size() != 0) {	
+			Vertice s = queue.poll(); 
+			for(int i = 0; i < G.getVertices().size(); i++) {
+				
+				Vertice n = G.getVertices().get(i); 
+				if (!visitados[n.element()])  {
+	        	// Seteo cada adyacente como visitado 
+				// Agrego a la queue cada vertice ady
+					for (int j = 0; j < n.getAdyacentes().size(); j++) {
+						System.out.print(n.element());
+						visitados[n.element()] = true; 
+						queue.add(n); 
+						
+					}
+					
+				}
+			}
+		} 
+	}
 } 
 
 
