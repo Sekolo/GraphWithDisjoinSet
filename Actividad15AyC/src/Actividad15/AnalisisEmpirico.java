@@ -31,21 +31,31 @@ public class AnalisisEmpirico{
 			Utilidades uti = new Utilidades() ;
 			ArrayList<Arco> kruk;
 			try{
-				/*Grafo grafo = getGrafo(5,5);
+				
+				
+				Grafo grafo = builder.getGrafo(5,4,false);	
 				
 				System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
 				
-				conexo(grafo);
+				//conexo(grafo);
 				
 				if (uti.BFS(grafo)) 
 					System.out.println("es conexo con BFS");
 				else
 					System.out.println("NO es conexo con BFS");
 				
-				ver(grafo);*/
+				//ver(grafo);
 				
-				Grafo grafo = builder.getGrafo(5,4,false);	
+				Conexo con = new Conexo();
+				
+				if (con.cone(grafo))
+					System.out.println( "El grafo es Conexo");
+				else
+					System.out.println( "nooooooo es conexoooo!!!! ");
+				
+				
+				
 				
 				ArrayList<Arco> arco = grafo.getArcos();
 				
@@ -54,6 +64,9 @@ public class AnalisisEmpirico{
 					System.out.println( "arco "+i+": El Nodo "+arco.get(i).getV1().element()+
 											" conecta al nodo "+ arco.get(i).getV2().element());
 				}
+				
+				
+				
 				/*
 				Conexo con = new Conexo();
 				

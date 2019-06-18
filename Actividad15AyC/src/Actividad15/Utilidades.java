@@ -26,6 +26,8 @@ public class Utilidades {
 	{
 		boolean Esconexo = true;
 		int i=0;
+		setVisitados(G.getVerticesCount());
+		
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
 
@@ -239,47 +241,7 @@ public class Utilidades {
 	} 
 
 	
-public boolean cone(Grafo g) {
-		
-		
-		
-		LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
-		
-		visitados = new boolean[g.getVertices().size()];
-		
-		ArrayList<Vertice> verts = g.getVertices();
-		
-		for(int i = 0; i < verts.size() ; i++) {
-			
-			visitados[i] = false;
-		}
-		
-		try {	
-			Vertice s =  verts.get(0);
-			visitados[s.element()]=true; 
-	        queue.add(s); 
-			
-			while (queue.size() != 0) {	
-				
-				
-				s = queue.poll(); 
-				
-            
-				for(int i = 0; i < verts.size(); i++) {
-					
-					Vertice n = verts.get(i); //i.next(); 
-					if (!visitados[n.element()])  {
-                	
-						for (int j = 0; j < n.getAdyacentes().size(); j++) {
-                		
-							disj.union(n.element(),g.opposite(n , n.getAdyacentes().get(j)).element());
-							
-						}
-						visitados[n.element()] = true; 
-						queue.add(n); 
-					} 
-			} 
-        }
+
 	 
 } 
 
