@@ -18,6 +18,9 @@ import Grafo.GrafoImp;
 import Grafo.GrafoJson;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalTime;
+
 import Grafo.Vertice;
 
 
@@ -38,27 +41,35 @@ public class AnalisisEmpirico{
 			try{
 				Date date= new Date();
 				
-				Grafo grafo = builder.getGrafo(100,200,true);	
+				Grafo grafo = builder.getGrafo(500,124000,true);	
 				
-				Timestamp timestampini = new Timestamp(System.currentTimeMillis());
-		        //System.out.println(timestampini);
+				
+				
+				/*Timestamp timestampini = new Timestamp(System.currentTimeMillis());
+		        System.out.println(timestampini);
 		        long ini = timestampini.getTime();
-		        //System.out.println(ini);
+		        //System.out.println(ini);*/
+				LocalTime t = LocalTime.now(); 
+				
 		        
 		        
 		        Conexo con = new Conexo();
-				kruk = con.KruskalMerge(grafo);
+				kruk = con.Kruskal(grafo);
 				
 				//System.out.println("Termino Kruskal...........");
 				
-				Timestamp timestampfin = new Timestamp(System.currentTimeMillis());
-				//System.out.println(timestampfin);
+				double execution = Duration.between(t, LocalTime.now()).getNano();
+				System.out.println("Termino Kruskal...........Tiempo : "+ (execution/1000000));
+				
+				/*Timestamp timestampfin = new Timestamp(System.currentTimeMillis());
+				
 				//long fin1 = timestampini.getTime();
 				long fin = timestampfin.getTime();
 				//long t1 = fin1 - ini;
 				long t = fin - ini;
 				//System.out.println("Transcurrio : "+ t1);
 		        System.out.println("Transcurrio : "+ t +" milisegundos");
+		        System.out.println(timestampfin);*/
 				
 				/*
 				long time = date.getTime();
@@ -88,7 +99,6 @@ public class AnalisisEmpirico{
 					System.out.println("es conexo con BFS");
 				else
 					System.out.println("NO es conexo con BFS");
-				
 				
 				
 				
