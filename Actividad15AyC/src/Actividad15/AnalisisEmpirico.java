@@ -16,7 +16,10 @@ import Grafo.Arco;
 import Grafo.Grafo;
 import Grafo.GrafoImp;
 import Grafo.GrafoJson;
+import java.util.Date;
+import java.sql.Timestamp;
 import Grafo.Vertice;
+
 
 public class AnalisisEmpirico{
 	
@@ -25,45 +28,99 @@ public class AnalisisEmpirico{
 	
 	private Grafo grafo;
 	//private static ArrayList<Arco> kruk;
+	
+		
 		
 		public static void main(String[] args) throws IOException {
 			
 			Utilidades uti = new Utilidades() ;
 			ArrayList<Arco> kruk;
 			try{
+				Date date= new Date();
 				
+				Grafo grafo = builder.getGrafo(500,500,true);	
 				
-				Grafo grafo = builder.getGrafo(5,4,false);	
+				Timestamp timestampini = new Timestamp(System.currentTimeMillis());
+		        System.out.println(timestampini);
+		        long ini = timestampini.getTime();
+		        System.out.println(ini);
+				
+				/*
+				long time = date.getTime();
+			    System.out.println("Time in Milliseconds: " + time);
+			    System.out.println();
+			    Timestamp ts = new Timestamp(time);
+			    System.out.println("Current Time Stamp: " + ts);
+			    */
 				
 				System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 				
+				/*ArrayList<Arco> arcos = grafo.getArcos();
+				
+				System.out.println( "Lista de arcos ...");
+				for(int i = 0; i < arcos.size(); i++) {
+					System.out.println( "arco "+i+": El Nodo "+arcos.get(i).getV1().element()+
+											" enlazado al "+ arcos.get(i).getV2().element()+
+											" con peso: "+arcos.get(i).getPeso());
+				}
 				
 				//conexo(grafo);
+				
+				System.out.println();
+				System.out.println("Conexo con BFS...");
 				
 				if (uti.BFS(grafo)) 
 					System.out.println("es conexo con BFS");
 				else
 					System.out.println("NO es conexo con BFS");
 				
-				//ver(grafo);
 				
-				Conexo con = new Conexo();
 				
+				
+				
+				
+				
+				System.out.println();
+				System.out.println("Conexo con DisjoinSet...");
 				if (con.cone(grafo))
 					System.out.println( "El grafo es Conexo");
 				else
-					System.out.println( "nooooooo es conexoooo!!!! ");
+					System.out.println( "No es conexo PAPA!!!! ");*/
 				
+				Conexo con = new Conexo();
+				kruk = con.KruskalSinH(grafo);
 				
+				System.out.println("Termino Kruskal...........");
 				
+				Timestamp timestampfin = new Timestamp(System.currentTimeMillis());
+				System.out.println(timestampfin);
+				long fin1 = timestampini.getTime();
+				long fin = timestampfin.getTime();
+				//long t1 = fin1 - ini;
+				long t = fin - ini;
+				//System.out.println("Transcurrio : "+ t1);
+		        System.out.println("Transcurrio : "+ t +" milisegundos");
 				
-				ArrayList<Arco> arco = grafo.getArcos();
-				
-				System.out.println( "Lista de arcos");
-				for(int i = 0; i < arco.size(); i++) {
-					System.out.println( "arco "+i+": El Nodo "+arco.get(i).getV1().element()+
-											" conecta al nodo "+ arco.get(i).getV2().element());
+				/*time = date.getTime();
+			    System.out.println("Time in Milliseconds: " + time);
+			    System.out.println();
+			    ts = new Timestamp(time);
+			    System.out.println("Current Time Stamp: " + ts);*/
+			      
+				System.out.println();
+				System.out.println("Tamaño de arbol min:"+kruk.size());
+			
+				System.out.println();
+				System.out.println("Arcos del cobrimiento minimo...");
+				for(int i = 0; i < kruk.size(); i++) {
+					System.out.println( "arco "+i+": El Nodo "+kruk.get(i).getV1().element()+
+							" enlazado al nodo "+ kruk.get(i).getV2().element()+
+							" con peso "+kruk.get(i).getPeso());
 				}
+				
+				
+				
+				
 				
 				
 				
@@ -149,11 +206,8 @@ public class AnalisisEmpirico{
 				else
 					System.out.println("NO es conexo con BFS");*/
 				
-				System.out.println(" llego antes del kruskal.");
 
-		        //kruk = uti.Kruskal(grafo);
-		      
-				//System.out.print(kruk.size()+" tam kruk");
+		        
 				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

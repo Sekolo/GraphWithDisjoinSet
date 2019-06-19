@@ -2,7 +2,6 @@ package DisjoinSet;
 
 //import java.util.ArrayList;
 
-import Grafo.Vertice;
 
 public class DisjoinSetImp implements DisjoinSet{
 	private int[] padre;
@@ -35,9 +34,28 @@ public class DisjoinSetImp implements DisjoinSet{
 			rank[y] += 1;
 	}
 	
+	
+	public void unionSinHeu(int x, int y) {
+		linkSinHeu(findSetSinHeu(x), findSet(y));
+	}
+	
+	private void linkSinHeu(int x, int y) {
+		padre[x] = y;
+		
+		if (rank[x] == rank[y])
+			rank[y] += 1;
+	}
+	
 	public int findSet(int x) {
 		if (padre[x] != x)
 			padre[x]= findSet(padre[x]);
+		
+		return padre[x];
+	}
+	
+	public int findSetSinHeu(int x) {
+		if (padre[x] != x)
+			return findSet(padre[x]);
 		
 		return padre[x];
 	}

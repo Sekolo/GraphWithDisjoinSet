@@ -27,7 +27,12 @@ public class GrafoImp implements Grafo {
 		return vertices.size();
 	}
 	
+	
 	public ArrayList<Arco> getArcos() {
+		return arcos;
+	}
+	
+	public ArrayList<Arco> getArcosAdj() {
 		boolean[] visitados;
 		LinkedList<Vertice> queue = new LinkedList<Vertice>(); 
 	
@@ -76,6 +81,8 @@ public class GrafoImp implements Grafo {
 	return arcos;
 	
 	}
+	
+	
 	
 	public Vertice opposite(Vertice v, Arco e) throws Exception  {
 		if(e.getV1() == v)
@@ -155,7 +162,7 @@ public class GrafoImp implements Grafo {
 
 	@Override
 	public int getArcosCount() {
-		return 0;
+		return arcos.size();
 	}
 	
 	

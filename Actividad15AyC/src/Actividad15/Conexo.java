@@ -7,16 +7,21 @@ import Cola.Cola;
 import Cola.ColaImp;
 import DisjoinSet.DisjoinSet;
 import DisjoinSet.DisjoinSetImp;
+import DisjoinSet.DisjoinSetImpSinH;
 import Grafo.Arco;
 import Grafo.Grafo;
 import Grafo.Vertice;
 import Grafo.VerticeImp;
+import Heap.Heap;
+import Heap.MinHeap;
 
 public class Conexo {
 	
 	private boolean[] visitados;
 	
 	private DisjoinSet disj;
+	
+	
 	
 	public boolean cone(Grafo g) {
 		
@@ -104,8 +109,117 @@ public class Conexo {
 		
 	}
 	
+	/*public boolean esConexo(Grafo g) {
+		disj = new DisjoinSetImp(g.getVerticesCount());
+		int [] p = disj.getP();
+		
+		for(int i ; i < g.getVerticesCount(); i++) {
+			disj.makeSet(i);
+		}
+			
+		
+		int raiz = findSet(padre[0]);
+		boolean conex = true;
+		for (int i = 1; i < padre.length; i++) {
+			if (findSet(padre[i]) != raiz)
+				conex = false;
+		}
+		return conex;
+	
+	}*/
 	
 	
+	public ArrayList<Arco> Kruskal(Grafo G){
+		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
+		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+		
+        Heap heap = new MinHeap(G.getArcosCount());
+        DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
+        ArrayList<Arco> amc = new ArrayList<>();
+
+        for(int i = 0; i < G.getVerticesCount(); i++) {
+        	ds.makeSet(i);
+        }
+        
+        //Inicializo el Heap con todos los arcos.
+        for (int i = 0; i < G.getArcosCount() ; i++) {
+            heap.insert(G.getArcos().get(i));
+        }
+   
+        //Recorro todos los vertices.
+        int index = 0;
+        System.out.println( "inicia el desapilado del Haep ...");
+        while(index < G.getVerticesCount()-1){
+        	//Tomo el arco de menor peso
+            Arco edge = heap.popMin();
+            
+            System.out.println( "arco "+index+": El Nodo "+edge.getV1().element()+
+					" enlazado al "+ edge.getV2().element()+
+					" con peso: "+edge.getPeso());
+            
+            //check if adding this edge creates a cycle
+            //Checkeo a que set pertenece cada vertice del arco.
+            int v1_set = ds.findSet(edge.getV1().element());
+            int v2_set = ds.findSet(edge.getV2().element());
+
+            //Si son diferentes los uno
+            //Sino no los uno para evitar ciclos.
+            if(v1_set!=v2_set){
+            	amc.add(edge);
+                index++;
+                ds.union(v1_set,v2_set);
+            }
+        }
+        System.out.println( );
+        System.out.println("llego al fin de Kruskal");
+        return amc;
+    }
+	
+	public ArrayList<Arco> KruskalSinH(Grafo G){
+		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
+		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+		
+        Heap heap = new MinHeap(G.getArcosCount());
+        DisjoinSet ds = new DisjoinSetImpSinH(G.getVerticesCount());
+        ArrayList<Arco> amc = new ArrayList<>();
+
+        for(int i = 0; i < G.getVerticesCount(); i++) {
+        	ds.makeSet(i);
+        }
+        
+        //Inicializo el Heap con todos los arcos.
+        for (int i = 0; i < G.getArcosCount() ; i++) {
+            heap.insert(G.getArcos().get(i));
+        }
+   
+        //Recorro todos los vertices.
+        int index = 0;
+        System.out.println( "inicia el desapilado del Haep ...");
+        while(index < G.getVerticesCount()-1){
+        	//Tomo el arco de menor peso
+            Arco edge = heap.popMin();
+            
+            System.out.println( "arco "+index+": El Nodo "+edge.getV1().element()+
+					" enlazado al "+ edge.getV2().element()+
+					" con peso: "+edge.getPeso());
+            
+            //check if adding this edge creates a cycle
+            //Checkeo a que set pertenece cada vertice del arco.
+            int v1_set = ds.findSet(edge.getV1().element());
+            int v2_set = ds.findSet(edge.getV2().element());
+
+            //Si son diferentes los uno
+            //Sino no los uno para evitar ciclos.
+            if(v1_set!=v2_set){
+            	amc.add(edge);
+                index++;
+                ds.union(v1_set,v2_set);
+            }
+        }
+        System.out.println( );
+        System.out.println("llego al fin de Kruskal");
+        return amc;
+    }
 	
 
 }
