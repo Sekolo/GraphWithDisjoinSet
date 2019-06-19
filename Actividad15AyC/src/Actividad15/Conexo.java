@@ -375,52 +375,116 @@ public class Conexo {
 
 	//conMergesort
 
-		public ArrayList<Arco> KruskalMerge(Grafo G){
-			//Creo el heap y el DisjoinSet con su tamaño correspondiente.
-			//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
-			ArrayList<Arco> Larcos=new ArrayList<Arco>(G.getArcos().size());
-			MergeSort ob = new MergeSort(); 
-			//ArrayList<Arco> Larcos=G.getArcos();
-	        DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
-	        ArrayList<Arco> amc = new ArrayList<>();
+			public ArrayList<Arco> KruskalMergeConH(Grafo G){
+				//Creo  DisjoinSet con su tamaño correspondiente.
+				//Creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+				//Lista de arcos auxiliar
+				ArrayList<Arco> Larcos=new ArrayList<Arco>(G.getArcosCount());
+				
+				//ArrayList<Arco> Larcos=G.getArcos();
+		        DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
+		        ArrayList<Arco> amc = new ArrayList<>();
 
-	        for(int i = 0; i < G.getVerticesCount(); i++) {
-	        	ds.makeSet(i);
-	        }
-	        System.out.println( G.getArcosCount());
-	        //Inicializo el Heap con todos los arcos.
-	        for (int i = 0; i < G.getArcosCount() ; i++) {
-	            Larcos.set(i, G.getArcos().get(i));
-	        }
-	        System.out.println( "entre");
-	        ob.sort(Larcos, 0, Larcos.size()-1); 
-	        //Recorro todos los vertices.
-	        int index = 0;
-	        System.out.println( "inicia el desapilado del Haep ...");
-	        while(index < G.getVerticesCount()-1){
-	        	//Tomo el arco de menor peso
-	            Arco edge = Larcos.get(index);
-	            
-	            System.out.println( "arco "+index+": El Nodo "+edge.getV1().element()+
-						" enlazado al "+ edge.getV2().element()+
-						" con peso: "+edge.getPeso());
-	            
-	            //check if adding this edge creates a cycle
-	            //Checkeo a que set pertenece cada vertice del arco.
-	            int v1_set = ds.findSet(edge.getV1().element());
-	            int v2_set = ds.findSet(edge.getV2().element());
+		        for(int i = 0; i < G.getVerticesCount(); i++) {
+		        	ds.makeSet(i);
+		        }
+		        System.out.println( "cant");
+		        //Inicializo la nueva lista a ordenar.
+		        for (int i = 0; i < G.getArcosCount() ; i++) {
+		        	Arco a=G.getArcos().get(i);
+		            Larcos.add(i,a);
+		        }
+		        //Ordeno La lista de arcos Larcos
+		        MergeSort ob = new MergeSort();
+		        ob.sort(Larcos, 0, Larcos.size()- 1); 
+		        
+		        int index = 0;
+		        int i = 0;
+		        System.out.println( "inicia el desapilado del Haep ...");
+		        
+		        while(index < G.getVerticesCount()-1){
+		        	//Tomo el arco de menor peso
+		        	
+		            Arco edge = Larcos.get(i);
+		            i++;
+		            
+		           
+		            
+		            System.out.println( "arco "+index+": El Nodo "+edge.getV1().element()+
+							" enlazado al "+ edge.getV2().element()+
+							" con peso: "+edge.getPeso());
+		            
+		           
+		            //Checkeo a que set pertenece cada vertice del arco.
+		            int v1_set = ds.findSet(edge.getV1().element());
+		            int v2_set = ds.findSet(edge.getV2().element());
+		           
+		            //Si son diferentes los uno
+		            //Sino no los uno para evitar ciclos.
+		            if(v1_set!=v2_set){
+		            	amc.add(edge);
+		                index++;
+		                ds.union(v1_set,v2_set);
+		            }
+		        }
+		        
+		        
+		        System.out.println( );
+		        System.out.println("llego al fin de Kruskal");
+		        return amc;
+			}
+			
+			public ArrayList<Arco> KruskalMergeSinH(Grafo G){
+				//Creo  DisjoinSet con su tamaño correspondiente.
+				//Creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
+				//Lista de arcos auxiliar
+				ArrayList<Arco> Larcos=new ArrayList<Arco>(G.getArcosCount());
+		        DisjoinSet ds = new DisjoinSetImpSinH(G.getVerticesCount());
+		        ArrayList<Arco> amc = new ArrayList<>();
 
-	            //Si son diferentes los uno
-	            //Sino no los uno para evitar ciclos.
-	            if(v1_set!=v2_set){
-	            	amc.add(edge);
-	                index++;
-	                ds.union(v1_set,v2_set);
-	            }
-	        }
-	        System.out.println( );
-	        System.out.println("llego al fin de Kruskal");
-	        return amc;
-	    }	
-
+		        for(int i = 0; i < G.getVerticesCount(); i++) {
+		        	ds.makeSet(i);
+		        }
+		        System.out.println( "cant");
+		        //Inicializo la Lista con todos los arcos.
+		        for (int i = 0; i < G.getArcosCount() ; i++) {
+		        	Arco a=G.getArcos().get(i);
+		            Larcos.add(i,a);
+		        }
+		        
+		        MergeSort ob = new MergeSort();
+		        ob.sort(Larcos, 0, Larcos.size()- 1);  
+		        
+		        int index = 0;
+		        int i=0;
+		        System.out.println( "inicia el desapilado del Haep ...");
+		        
+		        while(index < G.getVerticesCount()-1){
+		        	//Tomo el arco de menor peso
+		        	
+		            Arco edge = Larcos.get(i);
+		            i++;
+		            System.out.println( "arco "+index+": El Nodo "+edge.getV1().element()+
+							" enlazado al "+ edge.getV2().element()+
+							" con peso: "+edge.getPeso());
+		            
+		            //check if adding this edge creates a cycle
+		            //Checkeo a que set pertenece cada vertice del arco.
+		            int v1_set = ds.findSet(edge.getV1().element());
+		            int v2_set = ds.findSet(edge.getV2().element());
+		           
+		            //Si son diferentes los uno
+		            //Sino no los uno para evitar ciclos.
+		            if(v1_set!=v2_set){
+		            	amc.add(edge);
+		                index++;
+		                ds.union(v1_set,v2_set);
+		            }
+		        }
+		        
+		        
+		        System.out.println( );
+		        System.out.println("llego al fin de Kruskal");
+		        return amc;
+			}
 }
