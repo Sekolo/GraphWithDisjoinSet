@@ -27,13 +27,13 @@ import Grafo.Vertice;
 public class AnalisisEmpirico{
 	private static JsonToGrafo builder = new JsonToGrafo();
 	private Grafo grafo;
-		
+	
 	public static void main(String[] args) throws IOException {
 		Utilidades uti = new Utilidades() ;
 		ArrayList<Arco> kruk;
 		try{
 			Date date= new Date();
-			
+
 			Grafo grafo = builder.getGrafo(500,124000,true);	
 			
 			LocalTime t = LocalTime.now(); 
@@ -66,7 +66,7 @@ public class AnalisisEmpirico{
 			GrafoJson gr = gson.fromJson(jsonString, GrafoJson.class);
 			return new GrafoImp(gr);
 		} catch (Exception e) {
-			System.out.print("Cortó");
+			System.out.print("Cortï¿½");
 			throw new Exception(jsonString);
 		}
 	}
