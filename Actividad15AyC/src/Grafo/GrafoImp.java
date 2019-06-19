@@ -10,7 +10,7 @@ public class GrafoImp implements Grafo {
 	
 	public GrafoImp(ArrayList<Vertice> vert, ArrayList<Arco> arc){
 		vertices = vert;
-		arcos = arc; 
+		arcos = arc;
 	}
 	
 	public GrafoImp(ArrayList<Vertice> vert, int c){

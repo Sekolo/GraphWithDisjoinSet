@@ -38,12 +38,27 @@ public class AnalisisEmpirico{
 			try{
 				Date date= new Date();
 				
-				Grafo grafo = builder.getGrafo(500,500,true);	
+				Grafo grafo = builder.getGrafo(500,124000,true);	
 				
 				Timestamp timestampini = new Timestamp(System.currentTimeMillis());
-		        System.out.println(timestampini);
+		        //System.out.println(timestampini);
 		        long ini = timestampini.getTime();
-		        System.out.println(ini);
+		        //System.out.println(ini);
+		        
+		        
+		        Conexo con = new Conexo();
+				kruk = con.KruskalSinH(grafo);
+				
+				//System.out.println("Termino Kruskal...........");
+				
+				Timestamp timestampfin = new Timestamp(System.currentTimeMillis());
+				//System.out.println(timestampfin);
+				//long fin1 = timestampini.getTime();
+				long fin = timestampfin.getTime();
+				//long t1 = fin1 - ini;
+				long t = fin - ini;
+				//System.out.println("Transcurrio : "+ t1);
+		        System.out.println("Transcurrio : "+ t +" milisegundos");
 				
 				/*
 				long time = date.getTime();
@@ -87,19 +102,7 @@ public class AnalisisEmpirico{
 				else
 					System.out.println( "No es conexo PAPA!!!! ");*/
 				
-				Conexo con = new Conexo();
-				kruk = con.KruskalSinH(grafo);
 				
-				System.out.println("Termino Kruskal...........");
-				
-				Timestamp timestampfin = new Timestamp(System.currentTimeMillis());
-				System.out.println(timestampfin);
-				long fin1 = timestampini.getTime();
-				long fin = timestampfin.getTime();
-				//long t1 = fin1 - ini;
-				long t = fin - ini;
-				//System.out.println("Transcurrio : "+ t1);
-		        System.out.println("Transcurrio : "+ t +" milisegundos");
 				
 				/*time = date.getTime();
 			    System.out.println("Time in Milliseconds: " + time);

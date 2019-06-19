@@ -7,6 +7,7 @@ public class DisjoinSetImp implements DisjoinSet{
 	private int[] padre;
 	private int[] rank;
 	
+	
 	public DisjoinSetImp(int n) {
 		padre = new int [n];
 		rank = new int[n];
