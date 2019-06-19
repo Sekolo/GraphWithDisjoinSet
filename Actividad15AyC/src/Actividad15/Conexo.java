@@ -380,18 +380,19 @@ public class Conexo {
 			//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
 			ArrayList<Arco> Larcos=new ArrayList<Arco>(G.getArcos().size());
 			MergeSort ob = new MergeSort(); 
-	        
+			//ArrayList<Arco> Larcos=G.getArcos();
 	        DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
 	        ArrayList<Arco> amc = new ArrayList<>();
 
 	        for(int i = 0; i < G.getVerticesCount(); i++) {
 	        	ds.makeSet(i);
 	        }
-	        
+	        System.out.println( G.getArcosCount());
 	        //Inicializo el Heap con todos los arcos.
 	        for (int i = 0; i < G.getArcosCount() ; i++) {
-	            Larcos.set(i, (G.getArcos().get(i)));
+	            Larcos.set(i, G.getArcos().get(i));
 	        }
+	        System.out.println( "entre");
 	        ob.sort(Larcos, 0, Larcos.size()-1); 
 	        //Recorro todos los vertices.
 	        int index = 0;

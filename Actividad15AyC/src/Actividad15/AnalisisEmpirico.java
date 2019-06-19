@@ -38,7 +38,7 @@ public class AnalisisEmpirico{
 			try{
 				Date date= new Date();
 				
-				Grafo grafo = builder.getGrafo(500,124000,true);	
+				Grafo grafo = builder.getGrafo(100,200,true);	
 				
 				Timestamp timestampini = new Timestamp(System.currentTimeMillis());
 		        //System.out.println(timestampini);
@@ -47,7 +47,7 @@ public class AnalisisEmpirico{
 		        
 		        
 		        Conexo con = new Conexo();
-				kruk = con.KruskalSinH(grafo);
+				kruk = con.KruskalMerge(grafo);
 				
 				//System.out.println("Termino Kruskal...........");
 				
