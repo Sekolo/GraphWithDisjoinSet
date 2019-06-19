@@ -53,47 +53,25 @@ public class Conexo {
 			
 			while (queue.size() != 0) {	
 				
-				// Dequeue a vertex from queue and print it 
 				s = queue.poll(); 
-				//System.out.print(s.element()+" "); 
-			  
-				// Get all adjacent vertices of the dequeued vertex s 
-				// If a adjacent has not been visited, then mark it 
-				// visited and enqueue it 
-				// Iterator<Vertice> i = v[s].listIterator(); 
-            
+			
 				for(int i = 0; i < verts.size(); i++) {
-					//while (i.hasNext()) 
-					//{ 
+		
 					Vertice n = verts.get(i); //i.next(); 
 					if (!visitados[n.element()])  {
                 	
 						for (int j = 0; j < n.getAdyacentes().size(); j++) {
                 		
 							disj.union(n.element(),g.opposite(n , n.getAdyacentes().get(j)).element());
-							//System.out.println( "El nodo "+ i +" tiene los arcos "+g.opposite(n , n.getAdyacentes().get(j)).element());
+					
 						}
 						visitados[n.element()] = true; 
 						queue.add(n); 
 					} 
-			} 
-        }
+				} 
+			}
 			
-//			for(int i = 0; i < verts.size() ; i++) {
-//				ArrayList<Arco> adj = verts.get(i).getAdyacentes();
-//				c.enqueue(verts.get(i));
-//				for(int j = 0; j < verts.size() ; j++) {
-//					
-//					Vertice op = g.opposite(verts.get(i), verts.get(i).getAdyacentes().get(j));
-//					
-//					if (visitados[op.element()] = false) {
-//						
-//						disj.union(verts.get(i).element(), op.element());
-//						visitados[op.element()] = true;
-//					}
-//				}
-//			}
-			
+//
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,29 +94,39 @@ public class Conexo {
 		
 	}
 	
-	/*public boolean esConexo(Grafo g) {
+	public boolean esConexo(Grafo g) {
 		disj = new DisjoinSetImp(g.getVerticesCount());
-		int [] p = disj.getP();
+		ArrayList<Vertice> verts = g.getVertices();
 		
-		for(int i ; i < g.getVerticesCount(); i++) {
+		for(int i = 0; i < verts.size(); i++) {
 			disj.makeSet(i);
 		}
-			
 		
-		int raiz = findSet(padre[0]);
+		for(int i = 0; i < g.getArcosCount(); i++) {
+			System.out.println(g.getArcos().get(i).getV1().element()+"uno con "+g.getArcos().get(i).getV2().element());
+			disj.union(g.getArcos().get(i).getV1().element(),g.getArcos().get(i).getV2().element());
+		}
+		
+		System.out.println("");
+		int [] pa = disj.getP();
+		for(int i = 0; i < pa.length; i++) {
+			System.out.print( pa[i]);
+		}
+		System.out.println("");
+		
+		
+		int raiz = disj.findSet(pa[0]);
 		boolean conex = true;
-		for (int i = 1; i < padre.length; i++) {
-			if (findSet(padre[i]) != raiz)
+		for (int i = 1; i < pa.length; i++) {
+			if (disj.findSet(pa[i]) != raiz)
 				conex = false;
 		}
 		return conex;
 	
-	}*/
+	}
 	
 	class ArcoComparator implements Comparator<Arco>{ 
-        
-        // Overriding compare()method of Comparator  
-                    // for descending order of cgpa 
+       
         public int compare(Arco a, Arco a2) { 
             if (a.getPeso() > a2.getPeso()) 
                 return 1; 
@@ -153,7 +141,7 @@ public class Conexo {
 		//Creo el heap y el DisjoinSet con su tamaño correspondiente.
 		//Ademas creo la lista donde voy a guardar el Arbol minimal de cubrimiento.
 		
-        //G: Heap heap = new MinHeap(G.getArcosCount());
+        //Heap heap = new MinHeap(G.getArcosCount());
 		
 		PriorityQueue<Arco> heap=new PriorityQueue<Arco> (G.getArcosCount(), new ArcoComparator());
         DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
@@ -200,16 +188,6 @@ public class Conexo {
                 ds.union(v1_set,v2_set);
             }
         }
-//        Timestamp timestafin = new Timestamp(System.currentTimeMillis());
-//        System.out.println(timestafin);
-//        System.out.println("Al salir del ciclo");
-//        long fin = timestampini.getTime();
-        
-//        long t = fin - ini;
-//        System.out.println();
-//        System.out.println("Transcurrio : "+ t +" milisegundos dentro del DisjoinSet");
-//        System.out.println();
-//        System.out.println("llego al fin de Kruskal");
         return amc;
     }
 	
@@ -481,7 +459,6 @@ public class Conexo {
 		                ds.union(v1_set,v2_set);
 		            }
 		        }
-		        
 		        
 		        System.out.println( );
 		        System.out.println("llego al fin de Kruskal");

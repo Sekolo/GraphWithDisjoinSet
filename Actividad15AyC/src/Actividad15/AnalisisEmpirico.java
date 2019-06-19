@@ -34,7 +34,8 @@ public class AnalisisEmpirico{
 		try{
 			Date date= new Date();
 
-			Grafo grafo = builder.getGrafo(500,124000,true);	
+			Grafo grafo = builder.getGrafo(5,5,false);	
+			ver(grafo);
 			
 			LocalTime t = LocalTime.now(); 
 			
@@ -46,50 +47,36 @@ public class AnalisisEmpirico{
 			
 			System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 			
+			
+			if(con.cone(grafo))
+				System.out.println("Grafo es conexo con Recorrido");
+			else
+				System.out.println("Grafo NO  es conexo..........con Recorrido");
+			
+			if(con.esConexo(grafo))
+				System.out.println("Grafo es conexo");
+			else
+				System.out.println("Grafo NO  es conexo..........");
+			
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-
-	private static Grafo getGrafo(int nodos, int arcos) throws Exception {
-		// TODO Auto-generated method stub
-		String consulta = "curl http://cs.uns.edu.ar/~mom/AyC2019/grafo.php?nodos="+nodos+"&arcos="+arcos+"&conexo=1";   //&conexo=0
-		Process process = Runtime.getRuntime().exec(consulta);
-		InputStream inputSt = process.getInputStream();
-		@SuppressWarnings("resource")
-		Scanner s = new Scanner(inputSt).useDelimiter("\\A");
-		String jsonString = s.hasNext() ? s.next() : "";
-		System.out.println("Tengo el grafo en formato JSON. Lo convierto...");
-		Gson gson = new GsonBuilder().create();
-		try{
-			GrafoJson gr = gson.fromJson(jsonString, GrafoJson.class);
-			return new GrafoImp(gr);
-		} catch (Exception e) {
-			System.out.print("Cort�");
-			throw new Exception(jsonString);
+	
+	private static void ver(Grafo g) {
+		ArrayList<Arco> arcos = g.getArcos();
+		
+		for(int i = 0; i < arcos.size(); i++) {
+			System.out.println(i+": arco "+arcos.get(i).getV1().element() +" enlazado al nodo "+
+									arcos.get(i).getV2().element()+
+									" con valor: "+arcos.get(i).getPeso());
 		}
 	}
+
+
 		
 		
 		
-		
-		
-	private static void ver(Grafo g) {
-		System.out.println("-------------------------------------------");
-		System.out.println("kruskal:");
-		
-		System.out.println("llego hasta el fin del ciclo");
-	}
-		
-	private static void conexo(Grafo g) {
-		DisjoinSet conj=  new DisjoinSetImp(g.getVerticesCount());
-		
-		if (conj.conexo())
-			System.out.println("El grafo es conexo");
-		else
-			System.out.println("El grafo es NO conexo");
-		
-	}
 		
 }
