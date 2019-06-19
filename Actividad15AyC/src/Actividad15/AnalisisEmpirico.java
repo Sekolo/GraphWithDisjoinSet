@@ -123,13 +123,13 @@ public class AnalisisEmpirico{
 				System.out.println();
 				System.out.println("Tamaño de arbol min:"+kruk.size());
 			
-				System.out.println();
+				/*System.out.println();
 				System.out.println("Arcos del cobrimiento minimo...");
 				for(int i = 0; i < kruk.size(); i++) {
 					System.out.println( "arco "+i+": El Nodo "+kruk.get(i).getV1().element()+
 							" enlazado al nodo "+ kruk.get(i).getV2().element()+
 							" con peso "+kruk.get(i).getPeso());
-				}
+				}*/
 				
 				
 				

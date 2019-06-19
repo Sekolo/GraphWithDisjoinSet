@@ -157,7 +157,7 @@ public class Conexo {
 		
 		PriorityQueue<Arco> heap=new PriorityQueue<Arco> (G.getArcosCount(), new ArcoComparator());
         DisjoinSet ds = new DisjoinSetImp(G.getVerticesCount());
-        ArrayList<Arco> amc = new ArrayList<>();
+        ArrayList<Arco> amc = new ArrayList<Arco>();
 
         for(int i = 0; i < G.getVerticesCount(); i++) {
         	ds.makeSet(i);
@@ -220,7 +220,7 @@ public class Conexo {
 		PriorityQueue<Arco> heap = new PriorityQueue<Arco> (G.getArcosCount(), new ArcoComparator());
         //Heap heap = new MinHeap(G.getArcosCount());
         DisjoinSet ds = new DisjoinSetImpSinH(G.getVerticesCount());
-        ArrayList<Arco> amc = new ArrayList<>();
+        ArrayList<Arco> amc = new ArrayList<Arco>();
 
         for(int i = 0; i < G.getVerticesCount(); i++) {
         	ds.makeSet(i);
