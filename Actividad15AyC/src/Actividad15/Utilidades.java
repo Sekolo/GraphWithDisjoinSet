@@ -21,29 +21,28 @@ public class Utilidades {
 	
 	public boolean BFS (Grafo G)
 	{
-		
-		boolean Esconexo = true;
-		int i=0;
 		// Genero mi arreglo de visitados
 		setVisitados(G.getVerticesCount());
 		// Seteo todos los visitados como false
 		for (int j=0; j<G.getVerticesCount(); j++)
 			visitados[j] = false;
 		
-		while (i<G.getVerticesCount() && Esconexo)
-		{		// Accede con i=0 
-			if (!visitados[i])
-			{ //Si accede mas de una vez no es conexo
-				if(i!=0) { 
-					Esconexo = false;
-				}
-				else {
-					RecorridoNivel(G);
-				}
-			}
+		RecorridoNivel(G);
+			
+		
+		return EsConexo(G);
+	}
+	public boolean EsConexo(Grafo G)
+	{
+		boolean Conexo=true;
+		int i=0;
+		while(i<G.getVerticesCount() && Conexo)
+		{
+			if(!visitados[i])
+				Conexo=false;
 			i++;
 		}
-		return Esconexo;
+		return Conexo;
 	}
 	
 	public void RecorridoNivel(Grafo G)
@@ -66,7 +65,9 @@ public class Utilidades {
 								queue.add(Vady); 
 							}
 						}
-						catch(Exception e) {}
+						catch(Exception e) {
+							e.printStackTrace();
+						}
 					}
 					
 				}
