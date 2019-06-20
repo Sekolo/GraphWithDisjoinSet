@@ -52,7 +52,6 @@ public class MergeSort {
 		//Copio elementos a L si en caso existen
 		while (i < n1) 
 		{ 
-			//arr[k] = L[i];
 			arr.set(k, L.get(i));
 			i++; 
 			k++; 
@@ -75,7 +74,7 @@ public class MergeSort {
 			// Busco el Punto medio
 			int m = (l+r)/2; 
 
-			// Sort first and second halves 
+			
 			sort(arr, l, m); 
 			sort(arr , m+1, r); 
 
