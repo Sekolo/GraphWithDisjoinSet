@@ -27,6 +27,7 @@ import Grafo.Vertice;
 public class AnalisisEmpirico{
 	private static JsonToGrafo builder = new JsonToGrafo();
 	private Grafo grafo;
+	private static Utilidades util = new Utilidades(); 
 	
 	public static void main(String[] args) throws IOException {
 		Utilidades uti = new Utilidades() ;
@@ -34,26 +35,55 @@ public class AnalisisEmpirico{
 		try{
 			Date date= new Date();
 
-			Grafo grafo = builder.getGrafo(5,5,false);	
-			ver(grafo);
-			
-			LocalTime t = LocalTime.now(); 
-			
-	        Conexo con = new Conexo();
-			kruk = con.Kruskal(grafo);
-			
-			double execution = Duration.between(t, LocalTime.now()).getNano();
-			System.out.println("Termino Kruskal...........Tiempo : "+ (execution/1000000));
+			Grafo grafo = builder.getGrafo(500,124000,true);	
 			
 			System.out.println("Grafo conexo con "+ grafo.getVerticesCount() + " nodos y "+ grafo.getArcosCount() + " arcos construido");
 			
+			//ver(grafo);
 			
-			if(con.cone(grafo))
-				System.out.println("Grafo es conexo con Recorrido");
-			else
-				System.out.println("Grafo NO  es conexo..........con Recorrido");
+			LocalTime t1 = LocalTime.now(); 
 			
-			if(con.esConexo(grafo))
+			kruk = util.KruskalHeapCH(grafo);
+			
+			double execution1 = Duration.between(t1, LocalTime.now()).getNano();
+			System.out.println("Tiempo KruskalHeapCH: "+ (execution1/1000000));
+			
+//			
+//			LocalTime t2 = LocalTime.now(); 
+//			
+//			kruk = util.KruskalHeapSH(grafo);
+//			
+//			double execution2 = Duration.between(t2, LocalTime.now()).getNano();
+//			System.out.println("Tiempo KruskalHeapSH: "+ (execution2/1000000));
+//
+//			LocalTime t3 = LocalTime.now(); 
+//			
+//			kruk = util.KruskalListaCH(grafo);
+//			
+//			double execution3 = Duration.between(t3, LocalTime.now()).getNano();
+//			System.out.println("Tiempo KruskalListaCH: "+ (execution3/1000000));
+//			
+//			LocalTime t4 = LocalTime.now(); 
+//			
+//			kruk = util.KruskalListaSH(grafo);
+//			
+//			double execution4 = Duration.between(t4, LocalTime.now()).getNano();
+//			System.out.println("Tiempo KruskalListaSH: "+ (execution4/1000000));
+			
+			
+			LocalTime t5 = LocalTime.now(); 
+			
+			boolean rta = util.esConexo(grafo);
+			double execution5 = Duration.between(t5, LocalTime.now()).getNano();
+			System.out.println("Tiempo ConexoDisjoin: "+ (execution5/1000000));
+			
+//			LocalTime t6 = LocalTime.now(); 
+//			
+//			rta = util.esConexo(grafo);
+//			double execution6 = Duration.between(t6, LocalTime.now()).getNano();
+//			System.out.println("Tiempo ConexoDisjoin: "+ (execution6/1000000));
+		
+			if(rta)
 				System.out.println("Grafo es conexo");
 			else
 				System.out.println("Grafo NO  es conexo..........");
