@@ -14,6 +14,4 @@ public interface DisjoinSet {
 	
 	public int[] getP();
 	
-	public boolean conexo();
-	
 }

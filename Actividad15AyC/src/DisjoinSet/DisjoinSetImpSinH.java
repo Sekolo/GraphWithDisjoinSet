@@ -12,19 +12,15 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 	private ArrayList<Integer> ranking;
 	
 	public DisjoinSetImpSinH(int n) {
-		//padre = new int [n];
-		//rank = new int[n];
+		
 		
 		p = new  ArrayList<Integer>(n);
 		ranking = new  ArrayList<Integer>(n);
-		/*for (int i=0; i<n;i++ ) {
-			makeSet(i);
-		}	*/
+		
 	}
 	
 	public void  makeSet(Integer n){
-		//padre[n] = n;
-		//rank[n] = 0;
+
 		p.add(n);
 		ranking.add(0);
 	}
@@ -34,7 +30,7 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 	}
 	
 	
-	// Naive implementation of find 
+	
 	int findR(int parent[], int i) 
 	{ 
 	    if (parent[i] == -1) 
@@ -42,7 +38,7 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 	    return findR(parent, parent[i]); 
 	} 
 	   
-	// Naive implementation of union() 
+ 
 	void UnionR(int parent[], int x, int y) 
 	{ 
 	    int xset = findR(parent, x); 
@@ -51,10 +47,9 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 	}
 	
 	private void link(int x, int y) {
-		//padre[y] = x;
+	
 		p.set(y, x); 
-		//if (rank[x] == rank[y])
-			//rank[y] += 1;
+		
 		if (ranking.get(x) == ranking.get(y)) {
 			ranking.set(y, ranking.get(y) + 1);
 		}
@@ -64,8 +59,6 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 	
 	
 	public int findSet(int x) {
-		/*if (padre[x] != x)
-			return findSet(padre[x]);*/
 		
 		if (p.get(x) != x)
 			return findSet(p.get(x));
@@ -80,11 +73,7 @@ public class DisjoinSetImpSinH implements DisjoinSet{
 		return p;
 	}
 
-	@Override
-	public boolean conexo() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	
 
 }

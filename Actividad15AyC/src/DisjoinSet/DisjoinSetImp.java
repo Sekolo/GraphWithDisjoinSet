@@ -11,9 +11,7 @@ public class DisjoinSetImp implements DisjoinSet{
 	public DisjoinSetImp(int n) {
 		padre = new int [n];
 		rank = new int[n];
-		/*for (int i=0; i<n;i++ ) {
-			makeSet(i);
-		}	*/
+		
 	}
 	
 	public void  makeSet(Integer n){
@@ -61,16 +59,6 @@ public class DisjoinSetImp implements DisjoinSet{
 		return padre[x];
 	}
 	
-	
-	public boolean conexo() {
-		int raiz = findSet(padre[0]);
-		boolean conex = true;
-		for (int i = 1; i < padre.length; i++) {
-			if (findSet(padre[i]) != raiz)
-				conex = false;
-		}
-		return conex;
-	}
 
 	
 	public int[] getP() {
